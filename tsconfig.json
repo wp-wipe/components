@@ -1,0 +1,35 @@
+{
+  "ts-node": {
+    "esm": true,
+    "compiler": "typescript"
+  },
+  "compilerOptions": {
+    "target": "ES2022",
+    "strict": false,
+    "jsx": "react-jsxdev",
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "module": "es6",
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "allowSyntheticDefaultImports": false,
+    "useDefineForClassFields": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+
+    /*
+
+
+    /* Bundler mode 
+
+    /* Linting 
+
+    */
+  },
+  "include": ["src", "blocks", "build"]
+}
