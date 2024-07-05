@@ -1,15 +1,56 @@
 export type Attr = { value: any };
 
-export type AttrOptions = {
-  key: string;
-  default?: any;
-  type: allTypes;
-  label: string;
+type valigncontrols = "top" | "center" | "bottom" | "stretch" | "space-between";
+type haligncontrols = "none" | "left" | "center" | "right" | "wide" | "full";
 
-  withFocalPoint?: boolean;
+export type WipeGroup = {
+  label: string;
 };
 
-export type allTypes = "link" | "image" | "color" | "number" | "string";
+export type WipeAttrOptions = {
+  key: string;
+  label: string;
+  group?: WipeGroup;
+  default?: any;
+  type: "link" | "image" | "color" | "number" | "string" | "valign" | "halign";
+};
 
-export type AttrFct = (options: AttrOptions) => Attr;
-export type AttrFctType = (options: Omit<AttrOptions, "type">) => Attr;
+export interface LinkWipeAttrOptions extends WipeAttrOptions {
+  default?: any;
+  type: "link";
+}
+export interface ImageWipeAttrOptions extends WipeAttrOptions {
+  default?: any;
+  type: "image";
+  withFocalPoint?: boolean;
+}
+export interface ColorWipeAttrOptions extends WipeAttrOptions {
+  default?: any;
+  type: "color";
+}
+export interface NumberWipeAttrOptions extends WipeAttrOptions {
+  default?: any;
+  type: "number";
+}
+export interface StringWipeAttrOptions extends WipeAttrOptions {
+  default?: any;
+  type: "string";
+}
+export interface ValignWipeAttrOptions extends WipeAttrOptions {
+  default?: any;
+  type: "valign";
+  controls?: valigncontrols[];
+}
+export interface HalignWipeAttrOptions extends WipeAttrOptions {
+  default?: any;
+  type: "halign";
+  controls?: haligncontrols[];
+}
+
+export type WipeAttrFct<T extends WipeAttrOptions> = (options: T) => Attr;
+export type WipeAttrFctPartial<T extends WipeAttrOptions> = (options: Omit<T,'type'>) => Attr;
+
+export type WipeTypeOptions<T extends WipeAttrOptions> = {
+  options: T;
+  groupRender?: boolean;
+} & Record<string, any>;

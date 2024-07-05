@@ -1083,7 +1083,7 @@ var require_react_development = __commonJS({
           }
           return dispatcher.useContext(Context2);
         }
-        function useState3(initialState) {
+        function useState4(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -1886,7 +1886,7 @@ var require_react_development = __commonJS({
         exports.useMemo = useMemo2;
         exports.useReducer = useReducer2;
         exports.useRef = useRef2;
-        exports.useState = useState3;
+        exports.useState = useState4;
         exports.useSyncExternalStore = useSyncExternalStore2;
         exports.useTransition = useTransition2;
         exports.version = ReactVersion;
@@ -2507,7 +2507,7 @@ var require_react_jsx_dev_runtime_development = __commonJS({
           }
           return element;
         };
-        function jsxDEV8(type, config, maybeKey, source, self) {
+        function jsxDEV12(type, config, maybeKey, source, self) {
           {
             var propName;
             var props = {};
@@ -2738,7 +2738,7 @@ var require_react_jsx_dev_runtime_development = __commonJS({
               }
               error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
             }
-            var element = jsxDEV8(type, props, key, source, self);
+            var element = jsxDEV12(type, props, key, source, self);
             if (element == null) {
               return element;
             }
@@ -3400,7 +3400,7 @@ var require_react_jsx_runtime_development = __commonJS({
           }
           return element;
         };
-        function jsxDEV8(type, config, maybeKey, source, self) {
+        function jsxDEV12(type, config, maybeKey, source, self) {
           {
             var propName;
             var props = {};
@@ -3631,7 +3631,7 @@ var require_react_jsx_runtime_development = __commonJS({
               }
               error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
             }
-            var element = jsxDEV8(type, props, key, source, self);
+            var element = jsxDEV12(type, props, key, source, self);
             if (element == null) {
               return element;
             }
@@ -3949,16 +3949,82 @@ var SVG = (0, import_react.forwardRef)(
 );
 SVG.displayName = "SVG";
 
-// node_modules/@wordpress/icons/build-module/library/link.js
+// node_modules/@wordpress/icons/build-module/library/align-none.js
 var import_jsx_runtime2 = __toESM(require_jsx_runtime());
-var link = /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SVG, {
+var alignNone = /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SVG, {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24",
   children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Path, {
+    d: "M19 5.5H5V4h14v1.5ZM19 20H5v-1.5h14V20ZM5 9h14v6H5V9Z"
+  })
+});
+var align_none_default = alignNone;
+
+// node_modules/@wordpress/icons/build-module/library/link.js
+var import_jsx_runtime3 = __toESM(require_jsx_runtime());
+var link = /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Path, {
     d: "M10 17.389H8.444A5.194 5.194 0 1 1 8.444 7H10v1.5H8.444a3.694 3.694 0 0 0 0 7.389H10v1.5ZM14 7h1.556a5.194 5.194 0 0 1 0 10.39H14v-1.5h1.556a3.694 3.694 0 0 0 0-7.39H14V7Zm-4.5 6h5v-1.5h-5V13Z"
   })
 });
 var link_default = link;
+
+// node_modules/@wordpress/icons/build-module/library/position-center.js
+var import_jsx_runtime4 = __toESM(require_jsx_runtime());
+var positionCenter = /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Path, {
+    d: "M19 5.5H5V4h14v1.5ZM19 20H5v-1.5h14V20ZM7 9h10v6H7V9Z"
+  })
+});
+var position_center_default = positionCenter;
+
+// node_modules/@wordpress/icons/build-module/library/position-left.js
+var import_jsx_runtime5 = __toESM(require_jsx_runtime());
+var positionLeft = /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Path, {
+    d: "M5 5.5h8V4H5v1.5ZM5 20h8v-1.5H5V20ZM19 9H5v6h14V9Z"
+  })
+});
+var position_left_default = positionLeft;
+
+// node_modules/@wordpress/icons/build-module/library/position-right.js
+var import_jsx_runtime6 = __toESM(require_jsx_runtime());
+var positionRight = /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Path, {
+    d: "M19 5.5h-8V4h8v1.5ZM19 20h-8v-1.5h8V20ZM5 9h14v6H5V9Z"
+  })
+});
+var position_right_default = positionRight;
+
+// node_modules/@wordpress/icons/build-module/library/stretch-full-width.js
+var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+var stretchFullWidth = /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Path, {
+    d: "M5 4h14v11H5V4Zm11 16H8v-1.5h8V20Z"
+  })
+});
+var stretch_full_width_default = stretchFullWidth;
+
+// node_modules/@wordpress/icons/build-module/library/stretch-wide.js
+var import_jsx_runtime8 = __toESM(require_jsx_runtime());
+var stretchWide = /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Path, {
+    d: "M16 5.5H8V4h8v1.5ZM16 20H8v-1.5h8V20ZM5 9h14v6H5V9Z"
+  })
+});
+var stretch_wide_default = stretchWide;
 
 // src/AttrEdits/EditLinkAttr.tsx
 var import_jsx_dev_runtime5 = __toESM(require_jsx_dev_runtime(), 1);
@@ -3966,7 +4032,7 @@ var { PanelBody, Panel, ToolbarButton, Popover } = window.wp.components;
 var { __: __2 } = window.wp.i18n;
 var { useState: useState2 } = window.wp.element;
 var { URLInput: URLInput2, __experimentalLinkControl: LinkControl2, InspectorControls: InspectorControls2, BlockControls: BlockControls2 } = window.wp.blockEditor;
-var EditLinkAttr = ({ options, attributes, setAttributes }) => {
+var EditLinkAttr = ({ options, attributes, setAttributes, groupRender }) => {
   const [isEditingURL, setIsEditingURL] = useState2(false);
   const [popoverAnchor, setPopoverAnchor] = useState2(null);
   const startEditing = () => setIsEditingURL(true);
@@ -3982,12 +4048,28 @@ var EditLinkAttr = ({ options, attributes, setAttributes }) => {
       }
     });
   }
+  if (groupRender)
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+      URLInput2,
+      {
+        isFullWidth: true,
+        value: url,
+        onChange: (url2) => setUrl({ url: url2 })
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/AttrEdits/EditLinkAttr.tsx",
+        lineNumber: 30,
+        columnNumber: 7
+      }
+    );
   return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_jsx_dev_runtime5.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(InspectorControls2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+    !options.group && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(InspectorControls2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
       PanelBody,
       {
         title: options.label,
-        initialOpen: true,
+        initialOpen: false,
         children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Panel, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
           URLInput2,
           {
@@ -3999,26 +4081,26 @@ var EditLinkAttr = ({ options, attributes, setAttributes }) => {
           false,
           {
             fileName: "src/AttrEdits/EditLinkAttr.tsx",
-            lineNumber: 39,
-            columnNumber: 13
+            lineNumber: 44,
+            columnNumber: 15
           }
         ) }, void 0, false, {
           fileName: "src/AttrEdits/EditLinkAttr.tsx",
-          lineNumber: 38,
-          columnNumber: 11
+          lineNumber: 43,
+          columnNumber: 13
         })
       },
       void 0,
       false,
       {
         fileName: "src/AttrEdits/EditLinkAttr.tsx",
-        lineNumber: 35,
-        columnNumber: 9
+        lineNumber: 40,
+        columnNumber: 11
       }
     ) }, void 0, false, {
       fileName: "src/AttrEdits/EditLinkAttr.tsx",
-      lineNumber: 34,
-      columnNumber: 7
+      lineNumber: 39,
+      columnNumber: 9
     }),
     /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(BlockControls2, { children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
@@ -4033,7 +4115,7 @@ var EditLinkAttr = ({ options, attributes, setAttributes }) => {
         false,
         {
           fileName: "src/AttrEdits/EditLinkAttr.tsx",
-          lineNumber: 49,
+          lineNumber: 55,
           columnNumber: 9
         }
       ),
@@ -4064,7 +4146,7 @@ var EditLinkAttr = ({ options, attributes, setAttributes }) => {
             false,
             {
               fileName: "src/AttrEdits/EditLinkAttr.tsx",
-              lineNumber: 65,
+              lineNumber: 71,
               columnNumber: 13
             }
           )
@@ -4073,18 +4155,18 @@ var EditLinkAttr = ({ options, attributes, setAttributes }) => {
         false,
         {
           fileName: "src/AttrEdits/EditLinkAttr.tsx",
-          lineNumber: 56,
+          lineNumber: 62,
           columnNumber: 11
         }
       )
     ] }, void 0, true, {
       fileName: "src/AttrEdits/EditLinkAttr.tsx",
-      lineNumber: 48,
+      lineNumber: 54,
       columnNumber: 7
     })
   ] }, void 0, true, {
     fileName: "src/AttrEdits/EditLinkAttr.tsx",
-    lineNumber: 33,
+    lineNumber: 37,
     columnNumber: 5
   });
 };
@@ -4095,7 +4177,7 @@ var { PanelBody: PanelBody2, Panel: Panel2, Button, ButtonGroup, FocalPointPicke
 var { __: __3 } = window.wp.i18n;
 var { MediaUpload, MediaUploadCheck } = window.wp.blockEditor;
 var { URLInput: URLInput3, __experimentalLinkControl: LinkControl3, InspectorControls: InspectorControls3, BlockControls: BlockControls3 } = window.wp.blockEditor;
-var EditImageAttr = ({ options, attributes, setAttributes }) => {
+var EditImageAttr = ({ options, attributes, setAttributes, groupRender }) => {
   if (typeof attributes[options.key] == "string") {
     attributes[options.key] = { url: attributes[options.key], x: 0.5, y: 0.5 };
     setAttributes({ [options.key]: { url: attributes[options.key], x: 0.5, y: 0.5 } });
@@ -4122,11 +4204,103 @@ var EditImageAttr = ({ options, attributes, setAttributes }) => {
     });
   }
   const internalValue = attributes[options.key] || {};
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(InspectorControls3, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+  if (groupRender)
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: [
+      !!internalValue.id && options?.withFocalPoint && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+        FocalPointPicker,
+        {
+          __nextHasNoMarginBottom: true,
+          __next40pxDefaultSize: true,
+          label: __3("Focal point"),
+          url: internalValue.url,
+          value: internalValue ? { x: internalValue.x, y: internalValue.y } : { x: 0.5, y: 0.5 },
+          onChange: (value) => setFocalPoint(value),
+          onDragStart: (value) => setFocalPoint(value),
+          onDrag: (value) => setFocalPoint(value)
+        },
+        void 0,
+        false,
+        {
+          fileName: "src/AttrEdits/EditImageAttr.tsx",
+          lineNumber: 40,
+          columnNumber: 11
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(MediaUploadCheck, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(ButtonGroup, { children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+          MediaUpload,
+          {
+            onSelect: onFileSelect,
+            value: internalValue.id,
+            render: ({ open }) => {
+              const label = internalValue.id ? __3("Replace image") : __3("Select");
+              return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+                Button,
+                {
+                  onClick: open,
+                  variant: "primary",
+                  children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("span", { dangerouslySetInnerHTML: { __html: label } }, void 0, false, {
+                    fileName: "src/AttrEdits/EditImageAttr.tsx",
+                    lineNumber: 62,
+                    columnNumber: 21
+                  })
+                },
+                void 0,
+                false,
+                {
+                  fileName: "src/AttrEdits/EditImageAttr.tsx",
+                  lineNumber: 59,
+                  columnNumber: 19
+                }
+              );
+            }
+          },
+          void 0,
+          false,
+          {
+            fileName: "src/AttrEdits/EditImageAttr.tsx",
+            lineNumber: 53,
+            columnNumber: 13
+          }
+        ),
+        internalValue.id && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+          Button,
+          {
+            onClick: removeImage,
+            variant: "secondary",
+            children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("span", { dangerouslySetInnerHTML: { __html: __3("Remove image") } }, void 0, false, {
+              fileName: "src/AttrEdits/EditImageAttr.tsx",
+              lineNumber: 71,
+              columnNumber: 17
+            })
+          },
+          void 0,
+          false,
+          {
+            fileName: "src/AttrEdits/EditImageAttr.tsx",
+            lineNumber: 68,
+            columnNumber: 15
+          }
+        )
+      ] }, void 0, true, {
+        fileName: "src/AttrEdits/EditImageAttr.tsx",
+        lineNumber: 52,
+        columnNumber: 11
+      }) }, void 0, false, {
+        fileName: "src/AttrEdits/EditImageAttr.tsx",
+        lineNumber: 51,
+        columnNumber: 9
+      })
+    ] }, void 0, true, {
+      fileName: "src/AttrEdits/EditImageAttr.tsx",
+      lineNumber: 38,
+      columnNumber: 7
+    });
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: !options.group && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(InspectorControls3, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
     PanelBody2,
     {
       title: options.label,
-      initialOpen: true,
+      initialOpen: false,
       children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Panel2, { children: [
         !!internalValue.id && options?.withFocalPoint && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
           FocalPointPicker,
@@ -4144,8 +4318,8 @@ var EditImageAttr = ({ options, attributes, setAttributes }) => {
           false,
           {
             fileName: "src/AttrEdits/EditImageAttr.tsx",
-            lineNumber: 49,
-            columnNumber: 15
+            lineNumber: 87,
+            columnNumber: 17
           }
         ),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(MediaUploadCheck, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(ButtonGroup, { children: [
@@ -4163,16 +4337,16 @@ var EditImageAttr = ({ options, attributes, setAttributes }) => {
                     variant: "primary",
                     children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("span", { dangerouslySetInnerHTML: { __html: label } }, void 0, false, {
                       fileName: "src/AttrEdits/EditImageAttr.tsx",
-                      lineNumber: 71,
-                      columnNumber: 25
+                      lineNumber: 109,
+                      columnNumber: 27
                     })
                   },
                   void 0,
                   false,
                   {
                     fileName: "src/AttrEdits/EditImageAttr.tsx",
-                    lineNumber: 68,
-                    columnNumber: 23
+                    lineNumber: 106,
+                    columnNumber: 25
                   }
                 );
               }
@@ -4181,8 +4355,8 @@ var EditImageAttr = ({ options, attributes, setAttributes }) => {
             false,
             {
               fileName: "src/AttrEdits/EditImageAttr.tsx",
-              lineNumber: 62,
-              columnNumber: 17
+              lineNumber: 100,
+              columnNumber: 19
             }
           ),
           internalValue.id && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
@@ -4192,72 +4366,581 @@ var EditImageAttr = ({ options, attributes, setAttributes }) => {
               variant: "secondary",
               children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("span", { dangerouslySetInnerHTML: { __html: __3("Remove image") } }, void 0, false, {
                 fileName: "src/AttrEdits/EditImageAttr.tsx",
-                lineNumber: 80,
-                columnNumber: 21
+                lineNumber: 118,
+                columnNumber: 23
               })
             },
             void 0,
             false,
             {
               fileName: "src/AttrEdits/EditImageAttr.tsx",
-              lineNumber: 77,
-              columnNumber: 19
+              lineNumber: 115,
+              columnNumber: 21
             }
           )
         ] }, void 0, true, {
           fileName: "src/AttrEdits/EditImageAttr.tsx",
-          lineNumber: 61,
-          columnNumber: 15
+          lineNumber: 99,
+          columnNumber: 17
         }) }, void 0, false, {
           fileName: "src/AttrEdits/EditImageAttr.tsx",
-          lineNumber: 60,
-          columnNumber: 13
+          lineNumber: 98,
+          columnNumber: 15
         })
       ] }, void 0, true, {
         fileName: "src/AttrEdits/EditImageAttr.tsx",
-        lineNumber: 47,
-        columnNumber: 11
+        lineNumber: 85,
+        columnNumber: 13
       })
     },
     void 0,
     false,
     {
       fileName: "src/AttrEdits/EditImageAttr.tsx",
-      lineNumber: 44,
-      columnNumber: 9
+      lineNumber: 82,
+      columnNumber: 11
     }
   ) }, void 0, false, {
     fileName: "src/AttrEdits/EditImageAttr.tsx",
-    lineNumber: 43,
-    columnNumber: 7
+    lineNumber: 81,
+    columnNumber: 9
   }) }, void 0, false, {
     fileName: "src/AttrEdits/EditImageAttr.tsx",
-    lineNumber: 42,
+    lineNumber: 79,
+    columnNumber: 5
+  });
+};
+
+// src/AttrEdits/ui/Icons.tsx
+var import_jsx_dev_runtime7 = __toESM(require_jsx_dev_runtime(), 1);
+var alignBottom = /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { d: "M15 4H9v11h6V4zM4 18.5V20h16v-1.5H4z" }, void 0, false, {
+      fileName: "src/AttrEdits/ui/Icons.tsx",
+      lineNumber: 5,
+      columnNumber: 5
+    })
+  },
+  void 0,
+  false,
+  {
+    fileName: "src/AttrEdits/ui/Icons.tsx",
+    lineNumber: 2,
+    columnNumber: 3
+  }
+);
+var alignCenter = /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { d: "M20 11h-5V4H9v7H4v1.5h5V20h6v-7.5h5z" }, void 0, false, {
+      fileName: "src/AttrEdits/ui/Icons.tsx",
+      lineNumber: 13,
+      columnNumber: 5
+    })
+  },
+  void 0,
+  false,
+  {
+    fileName: "src/AttrEdits/ui/Icons.tsx",
+    lineNumber: 10,
+    columnNumber: 3
+  }
+);
+var alignTop = /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { d: "M9 20h6V9H9v11zM4 4v1.5h16V4H4z" }, void 0, false, {
+      fileName: "src/AttrEdits/ui/Icons.tsx",
+      lineNumber: 21,
+      columnNumber: 5
+    })
+  },
+  void 0,
+  false,
+  {
+    fileName: "src/AttrEdits/ui/Icons.tsx",
+    lineNumber: 18,
+    columnNumber: 3
+  }
+);
+var alignStretch = /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { d: "M4 4L20 4L20 5.5L4 5.5L4 4ZM10 7L14 7L14 17L10 17L10 7ZM20 18.5L4 18.5L4 20L20 20L20 18.5Z" }, void 0, false, {
+      fileName: "src/AttrEdits/ui/Icons.tsx",
+      lineNumber: 29,
+      columnNumber: 5
+    })
+  },
+  void 0,
+  false,
+  {
+    fileName: "src/AttrEdits/ui/Icons.tsx",
+    lineNumber: 26,
+    columnNumber: 3
+  }
+);
+var spaceBetween = /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { d: "M7 4H17V8L7 8V4ZM7 16L17 16V20L7 20V16ZM20 11.25H4V12.75H20V11.25Z" }, void 0, false, {
+      fileName: "src/AttrEdits/ui/Icons.tsx",
+      lineNumber: 37,
+      columnNumber: 5
+    })
+  },
+  void 0,
+  false,
+  {
+    fileName: "src/AttrEdits/ui/Icons.tsx",
+    lineNumber: 34,
+    columnNumber: 3
+  }
+);
+
+// src/AttrEdits/EditVerticalAlign.tsx
+var import_jsx_dev_runtime8 = __toESM(require_jsx_dev_runtime(), 1);
+var { PanelBody: PanelBody3, Panel: Panel3 } = window.wp.components;
+var { __: __4, _x } = window.wp.i18n;
+var { InspectorControls: InspectorControls4, BlockControls: BlockControls4, BlockVerticalAlignmentControl } = window.wp.blockEditor;
+var { __experimentalToggleGroupControl: ToggleGroupControl, __experimentalToggleGroupControlOptionIcon: ToggleGroupControlOptionIcon } = window.wp.components;
+var choices = {
+  top: {
+    icon: alignTop,
+    label: _x("Align top", "Block vertical alignment setting"),
+    value: "top"
+  },
+  center: {
+    icon: alignCenter,
+    label: _x("Align center", "Block vertical alignment setting"),
+    value: "center"
+  },
+  bottom: {
+    icon: alignBottom,
+    label: _x("Align bottom", "Block vertical alignment setting"),
+    value: "bottom"
+  },
+  stretch: {
+    icon: alignStretch,
+    label: _x("Stretch", "Block vertical alignment setting"),
+    value: "stretch"
+  },
+  "space-between": {
+    icon: spaceBetween,
+    label: _x("Space between", "Block vertical alignment setting"),
+    value: "space-between"
+  }
+};
+var EditVerticalAlign = ({ options, attributes, setAttributes, groupRender }) => {
+  const onChange = (alignment) => {
+    console.log(alignment);
+    setAttributes({ [options.key]: alignment });
+  };
+  const controls = options.controls || ["top", "center", "bottom"];
+  const alignement = attributes[options.key] || controls[0];
+  if (groupRender)
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+      ToggleGroupControl,
+      {
+        __nextHasNoMarginBottom: true,
+        isBlock: true,
+        label: options.label,
+        value: alignement,
+        onChange,
+        children: controls.map((control) => {
+          const { icon, label, value } = choices[control];
+          return /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+            ToggleGroupControlOptionIcon,
+            {
+              icon,
+              label,
+              value
+            },
+            value,
+            false,
+            {
+              fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+              lineNumber: 58,
+              columnNumber: 13
+            }
+          );
+        })
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+        lineNumber: 49,
+        columnNumber: 7
+      }
+    );
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_jsx_dev_runtime8.Fragment, { children: [
+    !options.group && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(InspectorControls4, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+      PanelBody3,
+      {
+        title: options.label,
+        initialOpen: false,
+        children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(Panel3, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+          ToggleGroupControl,
+          {
+            __nextHasNoMarginBottom: true,
+            isBlock: true,
+            label: "",
+            value: alignement,
+            onChange,
+            children: controls.map((control) => {
+              const { icon, label, value } = choices[control];
+              return /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+                ToggleGroupControlOptionIcon,
+                {
+                  icon,
+                  label,
+                  value
+                },
+                value,
+                false,
+                {
+                  fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+                  lineNumber: 85,
+                  columnNumber: 21
+                }
+              );
+            })
+          },
+          void 0,
+          false,
+          {
+            fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+            lineNumber: 76,
+            columnNumber: 15
+          }
+        ) }, void 0, false, {
+          fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+          lineNumber: 75,
+          columnNumber: 13
+        })
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+        lineNumber: 72,
+        columnNumber: 11
+      }
+    ) }, void 0, false, {
+      fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+      lineNumber: 71,
+      columnNumber: 9
+    }),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_jsx_dev_runtime8.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(BlockControls4, { group: "block", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+      BlockVerticalAlignmentControl,
+      {
+        value: alignement,
+        onChange,
+        controls
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+        lineNumber: 101,
+        columnNumber: 11
+      }
+    ) }, void 0, false, {
+      fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+      lineNumber: 100,
+      columnNumber: 9
+    }) }, void 0, false, {
+      fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+      lineNumber: 99,
+      columnNumber: 7
+    })
+  ] }, void 0, true, {
+    fileName: "src/AttrEdits/EditVerticalAlign.tsx",
+    lineNumber: 69,
+    columnNumber: 5
+  });
+};
+
+// src/AttrEdits/EditHorizontalAlign.tsx
+var import_jsx_dev_runtime9 = __toESM(require_jsx_dev_runtime(), 1);
+var { PanelBody: PanelBody4, Panel: Panel4 } = window.wp.components;
+var { __: __5, _x: _x2 } = window.wp.i18n;
+var { InspectorControls: InspectorControls5, BlockControls: BlockControls5, BlockAlignmentControl } = window.wp.blockEditor;
+var { __experimentalToggleGroupControl: ToggleGroupControl2, __experimentalToggleGroupControlOptionIcon: ToggleGroupControlOptionIcon2 } = window.wp.components;
+var choices2 = {
+  none: {
+    Icon: align_none_default,
+    title: _x2("None", "Alignment option")
+  },
+  left: {
+    Icon: position_left_default,
+    title: __5("Align left")
+  },
+  center: {
+    Icon: position_center_default,
+    title: __5("Align center")
+  },
+  right: {
+    Icon: position_right_default,
+    title: __5("Align right")
+  },
+  wide: {
+    Icon: stretch_wide_default,
+    title: __5("Wide width")
+  },
+  full: {
+    Icon: stretch_full_width_default,
+    title: __5("Full width")
+  }
+};
+var EditHorizontalAlign = ({ options, attributes, setAttributes, groupRender }) => {
+  const onChange = (alignment) => {
+    console.log(alignment);
+    setAttributes({ [options.key]: alignment });
+  };
+  const controls = options.controls || ["left", "center", "right"];
+  const alignement = attributes[options.key] || controls[0];
+  if (groupRender)
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+      ToggleGroupControl2,
+      {
+        __nextHasNoMarginBottom: true,
+        isBlock: true,
+        label: options.label,
+        value: alignement,
+        onChange,
+        children: controls.map((control) => {
+          const { Icon, title } = choices2[control];
+          return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+            ToggleGroupControlOptionIcon2,
+            {
+              icon: Icon,
+              label: title,
+              value: control
+            },
+            control,
+            false,
+            {
+              fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+              lineNumber: 57,
+              columnNumber: 13
+            }
+          );
+        })
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+        lineNumber: 48,
+        columnNumber: 7
+      }
+    );
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_jsx_dev_runtime9.Fragment, { children: [
+    !options.group && /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(InspectorControls5, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+      PanelBody4,
+      {
+        title: options.label,
+        initialOpen: false,
+        children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(Panel4, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+          ToggleGroupControl2,
+          {
+            __nextHasNoMarginBottom: true,
+            isBlock: true,
+            label: "",
+            value: alignement,
+            onChange,
+            children: controls.map((control) => {
+              const { Icon, title } = choices2[control];
+              return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+                ToggleGroupControlOptionIcon2,
+                {
+                  icon: Icon,
+                  label: title,
+                  value: control
+                },
+                control,
+                false,
+                {
+                  fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+                  lineNumber: 84,
+                  columnNumber: 21
+                }
+              );
+            })
+          },
+          void 0,
+          false,
+          {
+            fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+            lineNumber: 75,
+            columnNumber: 15
+          }
+        ) }, void 0, false, {
+          fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+          lineNumber: 74,
+          columnNumber: 13
+        })
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+        lineNumber: 71,
+        columnNumber: 11
+      }
+    ) }, void 0, false, {
+      fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+      lineNumber: 70,
+      columnNumber: 9
+    }),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_jsx_dev_runtime9.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(BlockControls5, { group: "block", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+      BlockAlignmentControl,
+      {
+        value: alignement,
+        onChange,
+        controls
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+        lineNumber: 100,
+        columnNumber: 11
+      }
+    ) }, void 0, false, {
+      fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+      lineNumber: 99,
+      columnNumber: 9
+    }) }, void 0, false, {
+      fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+      lineNumber: 98,
+      columnNumber: 7
+    })
+  ] }, void 0, true, {
+    fileName: "src/AttrEdits/EditHorizontalAlign.tsx",
+    lineNumber: 68,
+    columnNumber: 5
+  });
+};
+
+// src/AttrEdits/EditColorAttr.tsx
+var import_jsx_dev_runtime10 = __toESM(require_jsx_dev_runtime(), 1);
+var { PanelBody: PanelBody5, Panel: Panel5, ToolbarButton: ToolbarButton2, Popover: Popover2 } = window.wp.components;
+var { __: __6 } = window.wp.i18n;
+var { useState: useState3 } = window.wp.element;
+var { URLInput: URLInput4, __experimentalLinkControl: LinkControl4, InspectorControls: InspectorControls6, BlockControls: BlockControls6, PanelColorSettings } = window.wp.blockEditor;
+var EditColorAttr = ({ options, attributes, setAttributes, groupRender }) => {
+  const color = attributes[options.key] || "";
+  function setColor(color2) {
+    setAttributes({
+      [options.key]: color2
+    });
+  }
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_jsx_dev_runtime10.Fragment, { children: !options.group && /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(InspectorControls6, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
+    PanelBody5,
+    {
+      title: options.label,
+      initialOpen: false,
+      children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(Panel5, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
+        PanelColorSettings,
+        {
+          title: "",
+          colorSettings: [
+            {
+              value: color,
+              onChange: setColor,
+              label: __6(options.label)
+            }
+          ]
+        },
+        void 0,
+        false,
+        {
+          fileName: "src/AttrEdits/EditColorAttr.tsx",
+          lineNumber: 26,
+          columnNumber: 15
+        }
+      ) }, void 0, false, {
+        fileName: "src/AttrEdits/EditColorAttr.tsx",
+        lineNumber: 25,
+        columnNumber: 13
+      })
+    },
+    void 0,
+    false,
+    {
+      fileName: "src/AttrEdits/EditColorAttr.tsx",
+      lineNumber: 22,
+      columnNumber: 11
+    }
+  ) }, void 0, false, {
+    fileName: "src/AttrEdits/EditColorAttr.tsx",
+    lineNumber: 21,
+    columnNumber: 9
+  }) }, void 0, false, {
+    fileName: "src/AttrEdits/EditColorAttr.tsx",
+    lineNumber: 19,
     columnNumber: 5
   });
 };
 
 // src/Setup/RegisterBlock.tsx
-var import_jsx_dev_runtime7 = __toESM(require_jsx_dev_runtime(), 1);
+var import_jsx_dev_runtime11 = __toESM(require_jsx_dev_runtime(), 1);
 var { registerBlockType } = window.wp.blocks;
 var { render: ReactRender } = window.wp.element;
+var { Panel: Panel6, PanelBody: PanelBody6 } = window.wp.components;
+var { InspectorControls: InspectorControls7 } = window.wp.blockEditor;
+function getRenderer(options) {
+  switch (options.type) {
+    case "image":
+      return [EditImageAttr, options];
+    case "link":
+      return [EditLinkAttr, options];
+    case "valign":
+      return [EditVerticalAlign, options];
+    case "halign":
+      return [EditHorizontalAlign, options];
+    case "color":
+      return [EditColorAttr, options];
+    case "string":
+    case "number":
+    default:
+      return [() => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("div", {}, void 0, false, {
+        fileName: "src/Setup/RegisterBlock.tsx",
+        lineNumber: 46,
+        columnNumber: 21
+      }, this), options];
+  }
+}
 function buildVariantesAttributes(attr) {
-  const types = ["link", "image", "color", "number", "string"];
-  const allTypes = {};
-  types.forEach((type) => {
-    allTypes[type] = function(options) {
-      return attr({
-        ...options,
-        type
-      });
-    };
-  });
-  return allTypes;
+  return {
+    image: (option) => attr({ ...option, type: "image" }),
+    link: (option) => attr({ ...option, type: "link" }),
+    color: (option) => attr({ ...option, type: "color" }),
+    number: (option) => attr({ ...option, type: "number" }),
+    string: (option) => attr({ ...option, type: "string" }),
+    valign: (option) => attr({ ...option, type: "valign" }),
+    halign: (option) => attr({ ...option, type: "halign" })
+  };
 }
 function RegisterBlock(options) {
   const { name, render, ...otherOptions } = options;
   const Render = render;
   const attributes = {};
+  const groups = [];
   const registredAttrs = [];
   const attr = (options2) => {
     registredAttrs.push(options2);
@@ -4266,7 +4949,9 @@ function RegisterBlock(options) {
       image: "object",
       color: "string",
       number: "number",
-      string: "string"
+      string: "string",
+      valign: "string",
+      halign: "string"
     };
     attributes[options2.key] = {
       type: typeMap[options2.type]
@@ -4284,7 +4969,15 @@ function RegisterBlock(options) {
       }
     };
   };
-  ReactRender(Render({ attr, ...buildVariantesAttributes(attr) }), document.createElement("div"));
+  const group = (label) => {
+    if (groups.find((group2) => group2.label === label)) {
+      return groups.find((group2) => group2.label === label);
+    }
+    const obj = { label };
+    groups.push(obj);
+    return obj;
+  };
+  ReactRender(Render({ ...buildVariantesAttributes(attr), group }), document.createElement("div"));
   registerBlockType(name, {
     ...otherOptions,
     attributes,
@@ -4301,63 +4994,90 @@ function RegisterBlock(options) {
           }
         };
       };
-      return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_jsx_dev_runtime7.Fragment, { children: [
-        registredAttrs.map((attr3) => {
-          if (attr3.type === "link")
-            return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
-              EditLinkAttr,
-              {
-                options: attr3,
-                setAttributes,
-                attributes: attributes2
-              },
-              void 0,
-              false,
-              {
+      return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_jsx_dev_runtime11.Fragment, { children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(InspectorControls7, { children: groups.map((group2) => {
+          return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(
+            PanelBody6,
+            {
+              title: group2.label,
+              initialOpen: false,
+              children: /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(Panel6, { children: registredAttrs.filter((attr3) => attr3.group === group2).map((attr3) => {
+                const [RenderAttrFunction, options2] = getRenderer(attr3);
+                return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(
+                  RenderAttrFunction,
+                  {
+                    groupRender: true,
+                    options: options2,
+                    setAttributes,
+                    attributes: attributes2
+                  },
+                  options2.key,
+                  false,
+                  {
+                    fileName: "src/Setup/RegisterBlock.tsx",
+                    lineNumber: 142,
+                    columnNumber: 27
+                  },
+                  this
+                );
+              }) }, void 0, false, {
                 fileName: "src/Setup/RegisterBlock.tsx",
-                lineNumber: 89,
-                columnNumber: 17
-              },
-              this
-            );
-        }),
+                lineNumber: 136,
+                columnNumber: 19
+              }, this)
+            },
+            group2.label,
+            false,
+            {
+              fileName: "src/Setup/RegisterBlock.tsx",
+              lineNumber: 132,
+              columnNumber: 17
+            },
+            this
+          );
+        }) }, void 0, false, {
+          fileName: "src/Setup/RegisterBlock.tsx",
+          lineNumber: 129,
+          columnNumber: 11
+        }, this),
         registredAttrs.map((attr3) => {
-          if (attr3.type === "image")
-            return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
-              EditImageAttr,
-              {
-                options: attr3,
-                setAttributes,
-                attributes: attributes2
-              },
-              void 0,
-              false,
-              {
-                fileName: "src/Setup/RegisterBlock.tsx",
-                lineNumber: 99,
-                columnNumber: 17
-              },
-              this
-            );
+          const [RenderAttrFunction, options2] = getRenderer(attr3);
+          return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(
+            RenderAttrFunction,
+            {
+              groupRender: false,
+              options: options2,
+              setAttributes,
+              attributes: attributes2
+            },
+            options2.key,
+            false,
+            {
+              fileName: "src/Setup/RegisterBlock.tsx",
+              lineNumber: 159,
+              columnNumber: 15
+            },
+            this
+          );
         }),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(
           Render,
           {
-            attr: attr2,
-            ...buildVariantesAttributes(attr2)
+            ...buildVariantesAttributes(attr2),
+            group: (label) => ({ label })
           },
           void 0,
           false,
           {
             fileName: "src/Setup/RegisterBlock.tsx",
-            lineNumber: 106,
+            lineNumber: 168,
             columnNumber: 11
           },
           this
         )
       ] }, void 0, true, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 85,
+        lineNumber: 128,
         columnNumber: 9
       }, this);
     },
@@ -4373,23 +5093,23 @@ function RegisterBlock(options) {
           }
         };
       };
-      return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_jsx_dev_runtime7.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
+      return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_jsx_dev_runtime11.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(
         Render,
         {
-          attr: attr2,
-          ...buildVariantesAttributes(attr2)
+          ...buildVariantesAttributes(attr2),
+          group: (label) => ({ label })
         },
         void 0,
         false,
         {
           fileName: "src/Setup/RegisterBlock.tsx",
-          lineNumber: 126,
+          lineNumber: 188,
           columnNumber: 11
         },
         this
       ) }, void 0, false, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 125,
+        lineNumber: 187,
         columnNumber: 9
       }, this);
     }

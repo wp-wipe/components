@@ -2,15 +2,11 @@ import { PanelBody, Panel, ToolbarButton, Popover } from "@wordpress/components"
 import { __ } from "@wordpress/i18n";
 import { link } from "@wordpress/icons";
 import { useState } from "@wordpress/element";
-import type { AttrOptions } from "../Tools/Types";
+import type { LinkWipeAttrOptions, WipeTypeOptions } from "../Tools/Types";
 // @ts-ignore
 import { URLInput, __experimentalLinkControl as LinkControl, InspectorControls, BlockControls } from "@wordpress/block-editor";
 
-type LinkOptions = {
-  options: AttrOptions;
-} & Record<string, any>;
-
-export const EditLinkAttr = ({ options, attributes, setAttributes }: LinkOptions) => {
+export const EditLinkAttr = ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<LinkWipeAttrOptions>) => {
   const [isEditingURL, setIsEditingURL] = useState(false);
   const [popoverAnchor, setPopoverAnchor] = useState(null);
   const startEditing = () => setIsEditingURL(true);
@@ -29,21 +25,31 @@ export const EditLinkAttr = ({ options, attributes, setAttributes }: LinkOptions
       },
     });
   }
+  if (groupRender)
+    return (
+      <URLInput
+        isFullWidth={true}
+        value={url}
+        onChange={(url: string) => setUrl({ url })}
+      />
+    );
   return (
     <>
-      <InspectorControls>
-        <PanelBody
-          title={options.label}
-          initialOpen={true}>
-          <Panel>
-            <URLInput
-              isFullWidth={true}
-              value={url}
-              onChange={(url: string) => setUrl({ url })}
-            />
-          </Panel>
-        </PanelBody>
-      </InspectorControls>
+      {!options.group && (
+        <InspectorControls>
+          <PanelBody
+            title={options.label}
+            initialOpen={false}>
+            <Panel>
+              <URLInput
+                isFullWidth={true}
+                value={url}
+                onChange={(url: string) => setUrl({ url })}
+              />
+            </Panel>
+          </PanelBody>
+        </InspectorControls>
+      )}
 
       <BlockControls>
         <ToolbarButton
