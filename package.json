@@ -12,7 +12,7 @@
   },
   "scripts": {
     "watch": "wpwipe --admin src/index.ts --out-dir dist --esm --cjs --dts --watch",
-    "build": "wpwipe --admin src/index.ts --out-dir dist --esm --cjs --dts",
+    "build": "wpwipe --admin src/index.ts --out-dir dist --esm --cjs && npm run dts",
     "dts": "./node_modules/.bin/npm-dts generate --output ./dist/index.d.ts -L debug",
     "publish": "npm run build && npm run dts && npm publish --access public"
   },

@@ -1,7 +1,7 @@
 import { registerBlockType, type BlockConfiguration } from "@wordpress/blocks";
 import type { WipeAttrFct, WipeAttrOptions, ColorWipeAttrOptions, HalignWipeAttrOptions, ImageWipeAttrOptions, LinkWipeAttrOptions, StringWipeAttrOptions, ValignWipeAttrOptions, WipeAttrFctPartial } from "../Tools/Types";
 
-import Context from "../Tools/Context";
+import { Context } from "../Tools/Context";
 import { render as ReactRender } from "@wordpress/element";
 import { EditLinkAttr } from "../AttrEdits/EditLinkAttr";
 import { EditImageAttr } from "../AttrEdits/EditImageAttr";
@@ -22,8 +22,9 @@ interface CustomBlockOptions extends Omit<BlockConfiguration, "attributes" | "ed
     number: WipeAttrFctPartial<NumberWipeAttrOptions>;
     string: WipeAttrFctPartial<StringWipeAttrOptions>;
     valign: WipeAttrFctPartial<ValignWipeAttrOptions>;
-    halign: WipeAttrFctPartial<HalignWipeAttrOptions>; 
+    halign: WipeAttrFctPartial<HalignWipeAttrOptions>;
     group: (label: string) => { label: string };
+    attr: WipeAttrFct<WipeAttrOptions>;
   }) => JSX.Element;
 }
 
@@ -49,6 +50,7 @@ function getRenderer(options: WipeAttrOptions) {
 
 function buildVariantesAttributes(attr: WipeAttrFct<WipeAttrOptions>) {
   return {
+    attr: (options: WipeAttrOptions) => attr(options),
     image: ((option: Omit<ImageWipeAttrOptions, "type">) => attr({ ...option, type: "image" })) as WipeAttrFctPartial<ImageWipeAttrOptions>,
     link: ((option: Omit<LinkWipeAttrOptions, "type">) => attr({ ...option, type: "link" })) as WipeAttrFctPartial<LinkWipeAttrOptions>,
     color: ((option: Omit<ColorWipeAttrOptions, "type">) => attr({ ...option, type: "color" })) as WipeAttrFctPartial<ColorWipeAttrOptions>,
@@ -66,8 +68,8 @@ export function RegisterBlock(options: CustomBlockOptions) {
   // BUILDING ATTRIBUTES
   const attributes: any = {};
   const groups = [] as { label: string }[];
-
   const registredAttrs = [] as WipeAttrOptions[];
+  new Context().set("prepare").setAttributes(attributes).setRegistredAttributes(registredAttrs);
 
   const attr: WipeAttrFct<WipeAttrOptions> = (options) => {
     registredAttrs.push(options);
@@ -82,7 +84,8 @@ export function RegisterBlock(options: CustomBlockOptions) {
     };
 
     attributes[options.key] = {
-      type: typeMap[options.type],
+      type: typeMap[options.type] || options.type,
+      default: options.default,
     };
     let internalValue = options.default || "";
     return {

@@ -1,7 +1,7 @@
 export type Attr = { value: any };
 
 type valigncontrols = "top" | "center" | "bottom" | "stretch" | "space-between";
-type haligncontrols = "none" | "left" | "center" | "right" | "wide" | "full";
+type haligncontrols = "none" | "left" | "center" | "right" | "wide" | "full" | "narrow" | "normal";
 
 export type WipeGroup = {
   label: string;
@@ -12,7 +12,7 @@ export type WipeAttrOptions = {
   label: string;
   group?: WipeGroup;
   default?: any;
-  type: "link" | "image" | "color" | "number" | "string" | "valign" | "halign";
+  type: "link" | "image" | "color" | "number" | "string" | "valign" | "halign" | "array";
 };
 
 export interface LinkWipeAttrOptions extends WipeAttrOptions {
@@ -23,6 +23,7 @@ export interface ImageWipeAttrOptions extends WipeAttrOptions {
   default?: any;
   type: "image";
   withFocalPoint?: boolean;
+  asFeaturedImage?: boolean;
 }
 export interface ColorWipeAttrOptions extends WipeAttrOptions {
   default?: any;
@@ -48,7 +49,7 @@ export interface HalignWipeAttrOptions extends WipeAttrOptions {
 }
 
 export type WipeAttrFct<T extends WipeAttrOptions> = (options: T) => Attr;
-export type WipeAttrFctPartial<T extends WipeAttrOptions> = (options: Omit<T,'type'>) => Attr;
+export type WipeAttrFctPartial<T extends WipeAttrOptions> = (options: Omit<T, "type">) => Attr;
 
 export type WipeTypeOptions<T extends WipeAttrOptions> = {
   options: T;

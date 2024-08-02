@@ -1088,7 +1088,7 @@ var require_react_development = __commonJS({
           }
           return dispatcher.useContext(Context2);
         }
-        function useState4(initialState) {
+        function useState3(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -1891,7 +1891,7 @@ var require_react_development = __commonJS({
         exports.useMemo = useMemo2;
         exports.useReducer = useReducer2;
         exports.useRef = useRef2;
-        exports.useState = useState4;
+        exports.useState = useState3;
         exports.useSyncExternalStore = useSyncExternalStore2;
         exports.useTransition = useTransition2;
         exports.version = ReactVersion;
@@ -2512,7 +2512,7 @@ var require_react_jsx_dev_runtime_development = __commonJS({
           }
           return element;
         };
-        function jsxDEV12(type, config, maybeKey, source, self) {
+        function jsxDEV16(type, config, maybeKey, source, self) {
           {
             var propName;
             var props = {};
@@ -2743,7 +2743,7 @@ var require_react_jsx_dev_runtime_development = __commonJS({
               }
               error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
             }
-            var element = jsxDEV12(type, props, key, source, self);
+            var element = jsxDEV16(type, props, key, source, self);
             if (element == null) {
               return element;
             }
@@ -3405,7 +3405,7 @@ var require_react_jsx_runtime_development = __commonJS({
           }
           return element;
         };
-        function jsxDEV12(type, config, maybeKey, source, self) {
+        function jsxDEV16(type, config, maybeKey, source, self) {
           {
             var propName;
             var props = {};
@@ -3636,7 +3636,7 @@ var require_react_jsx_runtime_development = __commonJS({
               }
               error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
             }
-            var element = jsxDEV12(type, props, key, source, self);
+            var element = jsxDEV16(type, props, key, source, self);
             if (element == null) {
               return element;
             }
@@ -3717,9 +3717,14 @@ var require_jsx_runtime = __commonJS({
 var src_exports = {};
 __export(src_exports, {
   Childs: () => Childs,
+  Context: () => Context,
+  EditOnly: () => EditOnly,
   Image: () => Image,
   Link: () => Link,
+  PageThumbnail: () => PageThumbnail,
+  PageTitle: () => PageTitle,
   RegisterBlock: () => RegisterBlock,
+  SaveOnly: () => SaveOnly,
   Text: () => Text
 });
 module.exports = __toCommonJS(src_exports);
@@ -3728,6 +3733,8 @@ module.exports = __toCommonJS(src_exports);
 var Context = class _Context {
   static _instance;
   value;
+  attributes = {};
+  registredAttributes;
   constructor() {
     if (!_Context._instance) {
       _Context._instance = this;
@@ -3736,9 +3743,24 @@ var Context = class _Context {
   }
   set(value) {
     this.value = value;
+    return this;
   }
   get() {
     return this.value;
+  }
+  setAttributes(attributes) {
+    this.attributes = attributes;
+    return this;
+  }
+  getAttributes() {
+    return this.attributes;
+  }
+  setRegistredAttributes(attributes) {
+    this.registredAttributes = attributes;
+    return this;
+  }
+  getRegistredAttributes() {
+    return this.registredAttributes;
   }
 };
 
@@ -3748,29 +3770,32 @@ var { RichText } = window.wp.blockEditor;
 var Text = ({ children, ...props }) => {
   const context = new Context().get();
   if (context === "save") {
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: children.value }, void 0, false, {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { dangerouslySetInnerHTML: { __html: children.value } }, void 0, false, {
       fileName: "src/Components/Text.tsx",
-      lineNumber: 12,
+      lineNumber: 13,
       columnNumber: 12
     });
   }
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-    RichText,
-    {
-      ...props,
-      value: children.value,
-      onChange: (value) => {
-        children.value = value;
+  if (context === "edit") {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
+      RichText,
+      {
+        ...props,
+        value: children.value,
+        onChange: (value) => {
+          children.value = value;
+        }
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/Components/Text.tsx",
+        lineNumber: 17,
+        columnNumber: 7
       }
-    },
-    void 0,
-    false,
-    {
-      fileName: "src/Components/Text.tsx",
-      lineNumber: 15,
-      columnNumber: 5
-    }
-  );
+    );
+  }
+  return children.value;
 };
 
 // src/Components/Link.tsx
@@ -3849,7 +3874,7 @@ var Image = ({ src, ...props }) => {
   if (typeof src.value === "string") {
     src.value = { url: src.value };
   }
-  if (context === "edit") {
+  if (context === "edit" && src.value?.url) {
     return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
       "img",
       {
@@ -3865,7 +3890,7 @@ var Image = ({ src, ...props }) => {
       }
     );
   }
-  if (context === "save") {
+  if (context === "save" && src.value?.url) {
     return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
       "img",
       {
@@ -4854,11 +4879,10 @@ var EditHorizontalAlign = ({ options, attributes, setAttributes, groupRender }) 
 
 // src/AttrEdits/EditColorAttr.tsx
 var import_jsx_dev_runtime10 = __toESM(require_jsx_dev_runtime(), 1);
-var { PanelBody: PanelBody5, Panel: Panel5, ToolbarButton: ToolbarButton2, Popover: Popover2 } = window.wp.components;
+var { PanelBody: PanelBody5, Panel: Panel5 } = window.wp.components;
 var { __: __6 } = window.wp.i18n;
-var { useState: useState3 } = window.wp.element;
 var { URLInput: URLInput4, __experimentalLinkControl: LinkControl4, InspectorControls: InspectorControls6, BlockControls: BlockControls6, PanelColorSettings } = window.wp.blockEditor;
-var EditColorAttr = ({ options, attributes, setAttributes, groupRender }) => {
+var EditColorAttr = ({ options, attributes, setAttributes }) => {
   const color = attributes[options.key] || "";
   function setColor(color2) {
     setAttributes({
@@ -4886,12 +4910,12 @@ var EditColorAttr = ({ options, attributes, setAttributes, groupRender }) => {
         false,
         {
           fileName: "src/AttrEdits/EditColorAttr.tsx",
-          lineNumber: 26,
+          lineNumber: 24,
           columnNumber: 15
         }
       ) }, void 0, false, {
         fileName: "src/AttrEdits/EditColorAttr.tsx",
-        lineNumber: 25,
+        lineNumber: 23,
         columnNumber: 13
       })
     },
@@ -4899,16 +4923,16 @@ var EditColorAttr = ({ options, attributes, setAttributes, groupRender }) => {
     false,
     {
       fileName: "src/AttrEdits/EditColorAttr.tsx",
-      lineNumber: 22,
+      lineNumber: 20,
       columnNumber: 11
     }
   ) }, void 0, false, {
     fileName: "src/AttrEdits/EditColorAttr.tsx",
-    lineNumber: 21,
+    lineNumber: 19,
     columnNumber: 9
   }) }, void 0, false, {
     fileName: "src/AttrEdits/EditColorAttr.tsx",
-    lineNumber: 19,
+    lineNumber: 17,
     columnNumber: 5
   });
 };
@@ -4936,13 +4960,14 @@ function getRenderer(options) {
     default:
       return [() => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("div", {}, void 0, false, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 46,
+        lineNumber: 47,
         columnNumber: 21
       }, this), options];
   }
 }
 function buildVariantesAttributes(attr) {
   return {
+    attr: (options) => attr(options),
     image: (option) => attr({ ...option, type: "image" }),
     link: (option) => attr({ ...option, type: "link" }),
     color: (option) => attr({ ...option, type: "color" }),
@@ -4958,6 +4983,7 @@ function RegisterBlock(options) {
   const attributes = {};
   const groups = [];
   const registredAttrs = [];
+  new Context().set("prepare").setAttributes(attributes).setRegistredAttributes(registredAttrs);
   const attr = (options2) => {
     registredAttrs.push(options2);
     const typeMap = {
@@ -4970,7 +4996,8 @@ function RegisterBlock(options) {
       halign: "string"
     };
     attributes[options2.key] = {
-      type: typeMap[options2.type]
+      type: typeMap[options2.type] || options2.type,
+      default: options2.default
     };
     let internalValue = options2.default || "";
     return {
@@ -5031,14 +5058,14 @@ function RegisterBlock(options) {
                   false,
                   {
                     fileName: "src/Setup/RegisterBlock.tsx",
-                    lineNumber: 142,
+                    lineNumber: 145,
                     columnNumber: 27
                   },
                   this
                 );
               }) }, void 0, false, {
                 fileName: "src/Setup/RegisterBlock.tsx",
-                lineNumber: 136,
+                lineNumber: 139,
                 columnNumber: 19
               }, this)
             },
@@ -5046,14 +5073,14 @@ function RegisterBlock(options) {
             false,
             {
               fileName: "src/Setup/RegisterBlock.tsx",
-              lineNumber: 132,
+              lineNumber: 135,
               columnNumber: 17
             },
             this
           );
         }) }, void 0, false, {
           fileName: "src/Setup/RegisterBlock.tsx",
-          lineNumber: 129,
+          lineNumber: 132,
           columnNumber: 11
         }, this),
         registredAttrs.map((attr3) => {
@@ -5070,7 +5097,7 @@ function RegisterBlock(options) {
             false,
             {
               fileName: "src/Setup/RegisterBlock.tsx",
-              lineNumber: 159,
+              lineNumber: 162,
               columnNumber: 15
             },
             this
@@ -5086,14 +5113,14 @@ function RegisterBlock(options) {
           false,
           {
             fileName: "src/Setup/RegisterBlock.tsx",
-            lineNumber: 168,
+            lineNumber: 171,
             columnNumber: 11
           },
           this
         )
       ] }, void 0, true, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 128,
+        lineNumber: 131,
         columnNumber: 9
       }, this);
     },
@@ -5119,18 +5146,148 @@ function RegisterBlock(options) {
         false,
         {
           fileName: "src/Setup/RegisterBlock.tsx",
-          lineNumber: 188,
+          lineNumber: 191,
           columnNumber: 11
         },
         this
       ) }, void 0, false, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 187,
+        lineNumber: 190,
         columnNumber: 9
       }, this);
     }
   });
 }
+
+// src/Components/EditOnly.tsx
+var import_jsx_dev_runtime12 = __toESM(require_jsx_dev_runtime(), 1);
+var EditOnly = ({ children }) => {
+  const context = new Context().get();
+  return context === "edit" ? /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_jsx_dev_runtime12.Fragment, { children }, void 0, false, {
+    fileName: "src/Components/EditOnly.tsx",
+    lineNumber: 4,
+    columnNumber: 31
+  }) : null;
+};
+
+// src/Components/SaveOnly.tsx
+var import_jsx_dev_runtime13 = __toESM(require_jsx_dev_runtime(), 1);
+var SaveOnly = ({ children }) => {
+  const context = new Context().get();
+  return context === "save" ? /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_jsx_dev_runtime13.Fragment, { children }, void 0, false, {
+    fileName: "src/Components/SaveOnly.tsx",
+    lineNumber: 4,
+    columnNumber: 31
+  }) : null;
+};
+
+// src/Components/PageTitle.tsx
+var import_jsx_dev_runtime14 = __toESM(require_jsx_dev_runtime(), 1);
+var { RichText: RichText2 } = window.wp.blockEditor;
+var { useSelect, useDispatch } = window.wp.data;
+var PageTitle = () => {
+  const context = new Context().get();
+  if (context === "save") {
+    return "[page-title]";
+  }
+  if (context === "edit") {
+    const [title, setTitle] = useSelect((select) => {
+      const { getEditedPostAttribute } = select("core/editor");
+      const { editPost } = useDispatch("core/editor");
+      return [
+        getEditedPostAttribute("title"),
+        function(value) {
+          editPost({ title: value });
+        }
+      ];
+    }, []);
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(
+      RichText2,
+      {
+        placeholder: "Titre de la page",
+        value: title,
+        onChange: setTitle
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/Components/PageTitle.tsx",
+        lineNumber: 22,
+        columnNumber: 7
+      }
+    );
+  }
+};
+
+// src/Components/PageThumbnail.tsx
+var import_jsx_dev_runtime15 = __toESM(require_jsx_dev_runtime(), 1);
+var { __: __7 } = window.wp.i18n;
+var { useSelect: useSelect2 } = window.wp.data;
+var PageThumbnail = ({ ...props }) => {
+  const ctx = new Context();
+  const context = ctx.get();
+  const registredAttributes = ctx.getRegistredAttributes();
+  if (context === "prepare") {
+    registredAttributes.push({
+      key: "__thumbnail",
+      label: __7("Thumbnail"),
+      type: "image",
+      default: ""
+    });
+  }
+  if (context === "edit") {
+    const { imgUrl } = useSelect2((select) => {
+      const { getEditedPostAttribute } = select("core/editor");
+      const thumbnail = getEditedPostAttribute("featured_media");
+      const media = thumbnail ? select("core").getMedia(thumbnail) : null;
+      return {
+        thumbnail,
+        imgUrl: media?.source_url || null
+      };
+    }, []);
+    const Picture = {
+      get value() {
+        return {
+          url: imgUrl
+        };
+      },
+      set value(val) {
+        console.log(val);
+      }
+    };
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+      Image,
+      {
+        src: Picture,
+        ...props
+      },
+      void 0,
+      false,
+      {
+        fileName: "src/Components/PageThumbnail.tsx",
+        lineNumber: 46,
+        columnNumber: 7
+      }
+    );
+  }
+  if (context === "save" && false) {
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("img", { ...props }, void 0, false, {
+      fileName: "src/Components/PageThumbnail.tsx",
+      lineNumber: 53,
+      columnNumber: 12
+    });
+  }
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", {}, void 0, false, {
+    fileName: "src/Components/PageThumbnail.tsx",
+    lineNumber: 56,
+    columnNumber: 10
+  });
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_jsx_dev_runtime15.Fragment, {}, void 0, false, {
+    fileName: "src/Components/PageThumbnail.tsx",
+    lineNumber: 58,
+    columnNumber: 10
+  });
+};
 /*! Bundled license information:
 
 react/cjs/react.development.js:

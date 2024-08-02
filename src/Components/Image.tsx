@@ -1,4 +1,4 @@
-import Context from "../Tools/Context";
+import { Context } from "../Tools/Context";
 
 import type { Attr } from "../Tools/Types";
 
@@ -13,7 +13,7 @@ export const Image = ({ src, ...props }: ImageOptions) => {
   if (typeof src.value === "string") {
     src.value = { url: src.value };
   }
-  if (context === "edit") {
+  if (context === "edit" && src.value?.url) {
     return (
       <img
         src={src.value?.url}
@@ -22,7 +22,7 @@ export const Image = ({ src, ...props }: ImageOptions) => {
     );
   }
 
-  if (context === "save") {
+  if (context === "save" && src.value?.url) {
     return (
       <img
         src={src.value?.url}

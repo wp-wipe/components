@@ -2,7 +2,7 @@ import { __ } from "@wordpress/i18n";
 // @ts-ignore
 import { URLInput, __experimentalLinkControl as LinkControl, InspectorControls, BlockControls } from "@wordpress/block-editor";
 
-import Context from "../Tools/Context";
+import {Context} from "../Tools/Context";
 
 import type { Attr } from "../Tools/Types";
 

@@ -1,4 +1,4 @@
-import Context from "../Tools/Context";
+import {Context} from "../Tools/Context";
 import { InnerBlocks } from "@wordpress/block-editor";
 
 export const Childs = ({ ...props }: Record<string, any>) => {

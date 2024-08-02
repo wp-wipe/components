@@ -1,3 +1,8 @@
+declare module '@wp-wipe/components/AttrEdits/EditColorAttr' {
+  import type { ColorWipeAttrOptions, WipeTypeOptions } from "@wp-wipe/components/Tools/Types";
+  export const EditColorAttr: ({ options, attributes, setAttributes }: WipeTypeOptions<ColorWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
+
+}
 declare module '@wp-wipe/components/AttrEdits/EditHorizontalAlign' {
   import type { HalignWipeAttrOptions, WipeTypeOptions } from "@wp-wipe/components/Tools/Types";
   export const EditHorizontalAlign: ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<HalignWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
@@ -5,12 +10,12 @@ declare module '@wp-wipe/components/AttrEdits/EditHorizontalAlign' {
 }
 declare module '@wp-wipe/components/AttrEdits/EditImageAttr' {
   import type { ImageWipeAttrOptions, WipeTypeOptions } from "@wp-wipe/components/Tools/Types";
-  export const EditImageAttr: ({ options, attributes, setAttributes }: WipeTypeOptions<ImageWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
+  export const EditImageAttr: ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<ImageWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
 
 }
 declare module '@wp-wipe/components/AttrEdits/EditLinkAttr' {
   import type { LinkWipeAttrOptions, WipeTypeOptions } from "@wp-wipe/components/Tools/Types";
-  export const EditLinkAttr: ({ options, attributes, setAttributes }: WipeTypeOptions<LinkWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
+  export const EditLinkAttr: ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<LinkWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
 
 }
 declare module '@wp-wipe/components/AttrEdits/EditVerticalAlign' {
@@ -28,6 +33,12 @@ declare module '@wp-wipe/components/AttrEdits/ui/Icons' {
 }
 declare module '@wp-wipe/components/Components/Childs' {
   export const Childs: ({ ...props }: Record<string, any>) => import("react/jsx-dev-runtime").JSX.Element;
+
+}
+declare module '@wp-wipe/components/Components/EditOnly' {
+  export const EditOnly: ({ children }: {
+      children: any;
+  }) => import("react/jsx-dev-runtime").JSX.Element;
 
 }
 declare module '@wp-wipe/components/Components/Image' {
@@ -48,12 +59,28 @@ declare module '@wp-wipe/components/Components/Link' {
   export {};
 
 }
+declare module '@wp-wipe/components/Components/PageThumbnail' {
+  type ImageOptions = {} & Record<string, any>;
+  export const PageThumbnail: ({ ...props }: ImageOptions) => import("react/jsx-dev-runtime").JSX.Element;
+  export {};
+
+}
+declare module '@wp-wipe/components/Components/PageTitle' {
+  export const PageTitle: () => import("react/jsx-dev-runtime").JSX.Element | "[page-title]";
+
+}
+declare module '@wp-wipe/components/Components/SaveOnly' {
+  export const SaveOnly: ({ children }: {
+      children: any;
+  }) => import("react/jsx-dev-runtime").JSX.Element;
+
+}
 declare module '@wp-wipe/components/Components/Text' {
   import type { Attr } from "@wp-wipe/components/Tools/Types";
   type TextOptions = {
       children: Attr;
   } & Record<string, any>;
-  export const Text: ({ children, ...props }: TextOptions) => import("react/jsx-dev-runtime").JSX.Element;
+  export const Text: ({ children, ...props }: TextOptions) => any;
   export {};
 
 }
@@ -64,23 +91,25 @@ declare module '@wp-wipe/components/Components/_Colors' {
 
 }
 declare module '@wp-wipe/components/Setup/RegisterBlock' {
+  /// <reference types="react" />
   import { type BlockConfiguration } from "@wordpress/blocks";
-  import type { WipeAttrFct, ColorWipeAttrOptions, HalignWipeAttrOptions, ImageWipeAttrOptions, LinkWipeAttrOptions, StringWipeAttrOptions, ValignWipeAttrOptions } from "@wp-wipe/components/Tools/Types";
+  import type { WipeAttrFct, WipeAttrOptions, ColorWipeAttrOptions, HalignWipeAttrOptions, ImageWipeAttrOptions, LinkWipeAttrOptions, StringWipeAttrOptions, ValignWipeAttrOptions, WipeAttrFctPartial } from "@wp-wipe/components/Tools/Types";
   import { NumberWipeAttrOptions } from "@wp-wipe/components/Tools/Types";
   interface CustomBlockOptions extends Omit<BlockConfiguration, "attributes" | "edit" | "save"> {
       name: string;
       title: string;
       render: (options: {
-          image: WipeAttrFct<ImageWipeAttrOptions>;
-          link: WipeAttrFct<LinkWipeAttrOptions>;
-          color: WipeAttrFct<ColorWipeAttrOptions>;
-          number: WipeAttrFct<NumberWipeAttrOptions>;
-          string: WipeAttrFct<StringWipeAttrOptions>;
-          valign: WipeAttrFct<ValignWipeAttrOptions>;
-          halign: WipeAttrFct<HalignWipeAttrOptions>;
+          image: WipeAttrFctPartial<ImageWipeAttrOptions>;
+          link: WipeAttrFctPartial<LinkWipeAttrOptions>;
+          color: WipeAttrFctPartial<ColorWipeAttrOptions>;
+          number: WipeAttrFctPartial<NumberWipeAttrOptions>;
+          string: WipeAttrFctPartial<StringWipeAttrOptions>;
+          valign: WipeAttrFctPartial<ValignWipeAttrOptions>;
+          halign: WipeAttrFctPartial<HalignWipeAttrOptions>;
           group: (label: string) => {
               label: string;
           };
+          attr: WipeAttrFct<WipeAttrOptions>;
       }) => JSX.Element;
   }
   export function RegisterBlock(options: CustomBlockOptions): void;
@@ -88,12 +117,19 @@ declare module '@wp-wipe/components/Setup/RegisterBlock' {
 
 }
 declare module '@wp-wipe/components/Tools/Context' {
-  export default class Context {
+  import { WipeAttrOptions } from "@wp-wipe/components/Tools/Types";
+  export class Context {
       private static _instance;
       private value;
+      private attributes;
+      private registredAttributes;
       constructor();
-      set(value: any): void;
+      set(value: any): this;
       get(): any;
+      setAttributes(attributes: Record<string, any>): this;
+      getAttributes(): Record<string, any>;
+      setRegistredAttributes(attributes: WipeAttrOptions[]): this;
+      getRegistredAttributes(): WipeAttrOptions[];
   }
 
 }
@@ -102,7 +138,7 @@ declare module '@wp-wipe/components/Tools/Types' {
       value: any;
   };
   type valigncontrols = "top" | "center" | "bottom" | "stretch" | "space-between";
-  type haligncontrols = "none" | "left" | "center" | "right" | "wide" | "full";
+  type haligncontrols = "none" | "left" | "center" | "right" | "wide" | "full" | "narrow" | "normal";
   export type WipeGroup = {
       label: string;
   };
@@ -111,7 +147,7 @@ declare module '@wp-wipe/components/Tools/Types' {
       label: string;
       group?: WipeGroup;
       default?: any;
-      type: "link" | "image" | "color" | "number" | "string" | "valign" | "halign";
+      type: "link" | "image" | "color" | "number" | "string" | "valign" | "halign" | "array";
   };
   export interface LinkWipeAttrOptions extends WipeAttrOptions {
       default?: any;
@@ -121,6 +157,7 @@ declare module '@wp-wipe/components/Tools/Types' {
       default?: any;
       type: "image";
       withFocalPoint?: boolean;
+      asFeaturedImage?: boolean;
   }
   export interface ColorWipeAttrOptions extends WipeAttrOptions {
       default?: any;
@@ -145,7 +182,7 @@ declare module '@wp-wipe/components/Tools/Types' {
       controls?: haligncontrols[];
   }
   export type WipeAttrFct<T extends WipeAttrOptions> = (options: T) => Attr;
-  export type WipeAttrFctPartial<T extends WipeAttrOptions> = (options: Omit<T, 'type'>) => Attr;
+  export type WipeAttrFctPartial<T extends WipeAttrOptions> = (options: Omit<T, "type">) => Attr;
   export type WipeTypeOptions<T extends WipeAttrOptions> = {
       options: T;
       groupRender?: boolean;
@@ -159,6 +196,11 @@ declare module '@wp-wipe/components/index' {
   export { Image } from "@wp-wipe/components/Components/Image";
   export { Childs } from "@wp-wipe/components/Components/Childs";
   export { RegisterBlock } from "@wp-wipe/components/Setup/RegisterBlock";
+  export { EditOnly } from "@wp-wipe/components/Components/EditOnly";
+  export { SaveOnly } from "@wp-wipe/components/Components/SaveOnly";
+  export { PageTitle } from "@wp-wipe/components/Components/PageTitle";
+  export { PageThumbnail } from "@wp-wipe/components/Components/PageThumbnail";
+  export { Context } from "@wp-wipe/components/Tools/Context";
 
 }
 declare module '@wp-wipe/components' {
