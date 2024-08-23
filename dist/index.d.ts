@@ -59,6 +59,13 @@ declare module '@wp-wipe/components/Components/Link' {
   export {};
 
 }
+declare module '@wp-wipe/components/Components/PageMeta' {
+  export const PageMeta: ({ meta, placeholder }: {
+      meta: string;
+      placeholder?: string;
+  }) => string | import("react/jsx-dev-runtime").JSX.Element;
+
+}
 declare module '@wp-wipe/components/Components/PageThumbnail' {
   type ImageOptions = {} & Record<string, any>;
   export const PageThumbnail: ({ ...props }: ImageOptions) => import("react/jsx-dev-runtime").JSX.Element;
@@ -133,6 +140,14 @@ declare module '@wp-wipe/components/Tools/Context' {
   }
 
 }
+declare module '@wp-wipe/components/Tools/Thumbnail' {
+  export function getThumbnail(): {
+      thumbnail_id: number;
+      thumbnail_url: any;
+  };
+  export function setThumbnail(thumbnail_id: number): void;
+
+}
 declare module '@wp-wipe/components/Tools/Types' {
   export type Attr = {
       value: any;
@@ -199,7 +214,7 @@ declare module '@wp-wipe/components/index' {
   export { EditOnly } from "@wp-wipe/components/Components/EditOnly";
   export { SaveOnly } from "@wp-wipe/components/Components/SaveOnly";
   export { PageTitle } from "@wp-wipe/components/Components/PageTitle";
-  export { PageThumbnail } from "@wp-wipe/components/Components/PageThumbnail";
+  export { PageMeta } from "@wp-wipe/components/Components/PageMeta";
   export { Context } from "@wp-wipe/components/Tools/Context";
 
 }

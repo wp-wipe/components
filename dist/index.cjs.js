@@ -3721,7 +3721,7 @@ __export(src_exports, {
   EditOnly: () => EditOnly,
   Image: () => Image,
   Link: () => Link,
-  PageThumbnail: () => PageThumbnail,
+  PageMeta: () => PageMeta,
   PageTitle: () => PageTitle,
   RegisterBlock: () => RegisterBlock,
   SaveOnly: () => SaveOnly,
@@ -4106,7 +4106,7 @@ var EditLinkAttr = ({ options, attributes, setAttributes, groupRender }) => {
       }
     );
   return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_jsx_dev_runtime5.Fragment, { children: [
-    !options.group && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(InspectorControls2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(InspectorControls2, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
       PanelBody,
       {
         title: options.label,
@@ -4122,26 +4122,26 @@ var EditLinkAttr = ({ options, attributes, setAttributes, groupRender }) => {
           false,
           {
             fileName: "src/AttrEdits/EditLinkAttr.tsx",
-            lineNumber: 44,
-            columnNumber: 15
+            lineNumber: 43,
+            columnNumber: 13
           }
         ) }, void 0, false, {
           fileName: "src/AttrEdits/EditLinkAttr.tsx",
-          lineNumber: 43,
-          columnNumber: 13
+          lineNumber: 42,
+          columnNumber: 11
         })
       },
       void 0,
       false,
       {
         fileName: "src/AttrEdits/EditLinkAttr.tsx",
-        lineNumber: 40,
-        columnNumber: 11
+        lineNumber: 39,
+        columnNumber: 9
       }
     ) }, void 0, false, {
       fileName: "src/AttrEdits/EditLinkAttr.tsx",
-      lineNumber: 39,
-      columnNumber: 9
+      lineNumber: 38,
+      columnNumber: 7
     }),
     /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(BlockControls2, { children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
@@ -4156,7 +4156,7 @@ var EditLinkAttr = ({ options, attributes, setAttributes, groupRender }) => {
         false,
         {
           fileName: "src/AttrEdits/EditLinkAttr.tsx",
-          lineNumber: 55,
+          lineNumber: 53,
           columnNumber: 9
         }
       ),
@@ -4187,7 +4187,7 @@ var EditLinkAttr = ({ options, attributes, setAttributes, groupRender }) => {
             false,
             {
               fileName: "src/AttrEdits/EditLinkAttr.tsx",
-              lineNumber: 71,
+              lineNumber: 69,
               columnNumber: 13
             }
           )
@@ -4196,13 +4196,13 @@ var EditLinkAttr = ({ options, attributes, setAttributes, groupRender }) => {
         false,
         {
           fileName: "src/AttrEdits/EditLinkAttr.tsx",
-          lineNumber: 62,
+          lineNumber: 60,
           columnNumber: 11
         }
       )
     ] }, void 0, true, {
       fileName: "src/AttrEdits/EditLinkAttr.tsx",
-      lineNumber: 54,
+      lineNumber: 52,
       columnNumber: 7
     })
   ] }, void 0, true, {
@@ -4889,6 +4889,12 @@ var EditColorAttr = ({ options, attributes, setAttributes }) => {
       [options.key]: color2
     });
   }
+  if (options.group)
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_jsx_dev_runtime10.Fragment, {}, void 0, false, {
+      fileName: "src/AttrEdits/EditColorAttr.tsx",
+      lineNumber: 17,
+      columnNumber: 7
+    });
   return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_jsx_dev_runtime10.Fragment, { children: !options.group && /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(InspectorControls6, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
     PanelBody5,
     {
@@ -4910,12 +4916,12 @@ var EditColorAttr = ({ options, attributes, setAttributes }) => {
         false,
         {
           fileName: "src/AttrEdits/EditColorAttr.tsx",
-          lineNumber: 24,
+          lineNumber: 30,
           columnNumber: 15
         }
       ) }, void 0, false, {
         fileName: "src/AttrEdits/EditColorAttr.tsx",
-        lineNumber: 23,
+        lineNumber: 29,
         columnNumber: 13
       })
     },
@@ -4923,19 +4929,33 @@ var EditColorAttr = ({ options, attributes, setAttributes }) => {
     false,
     {
       fileName: "src/AttrEdits/EditColorAttr.tsx",
-      lineNumber: 20,
+      lineNumber: 26,
       columnNumber: 11
     }
   ) }, void 0, false, {
     fileName: "src/AttrEdits/EditColorAttr.tsx",
-    lineNumber: 19,
+    lineNumber: 25,
     columnNumber: 9
   }) }, void 0, false, {
     fileName: "src/AttrEdits/EditColorAttr.tsx",
-    lineNumber: 17,
+    lineNumber: 23,
     columnNumber: 5
   });
 };
+
+// src/Tools/Thumbnail.ts
+var { useSelect, useDispatch } = window.wp.data;
+function getThumbnail() {
+  return useSelect((select) => {
+    const { getEditedPostAttribute } = select("core/editor");
+    const thumbnail_id = getEditedPostAttribute("featured_media");
+    const media = thumbnail_id ? select("core").getMedia(thumbnail_id) : null;
+    return {
+      thumbnail_id,
+      thumbnail_url: media?.source_url || null
+    };
+  }, []);
+}
 
 // src/Setup/RegisterBlock.tsx
 var import_jsx_dev_runtime11 = __toESM(require_jsx_dev_runtime(), 1);
@@ -4960,7 +4980,7 @@ function getRenderer(options) {
     default:
       return [() => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("div", {}, void 0, false, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 47,
+        lineNumber: 48,
         columnNumber: 21
       }, this), options];
   }
@@ -5001,6 +5021,9 @@ function RegisterBlock(options) {
     };
     let internalValue = options2.default || "";
     return {
+      toString() {
+        return internalValue;
+      },
       get value() {
         return internalValue;
       },
@@ -5025,14 +5048,32 @@ function RegisterBlock(options) {
     ...otherOptions,
     attributes,
     edit: (props) => {
+      const { thumbnail_id, thumbnail_url } = getThumbnail();
       new Context().set("edit");
       const { attributes: attributes2, setAttributes } = props;
       const attr2 = (options2) => {
         return {
+          toString() {
+            return attributes2[options2.key];
+          },
           get value() {
+            const { asFeaturedImage, type } = options2;
+            if (type === "image" && asFeaturedImage) {
+              if (attributes2[options2.key] && attributes2[options2.key].id !== thumbnail_id) {
+                setAttributes({ [options2.key]: { id: thumbnail_id } });
+              }
+              if (attributes2[options2.key] && thumbnail_url && attributes2[options2.key].url !== thumbnail_url) {
+                attributes2[options2.key].url = thumbnail_url;
+              }
+              return { url: thumbnail_url, id: thumbnail_id };
+            }
             return attributes2[options2.key];
           },
           set value(newValue) {
+            const { asFeaturedImage, type } = options2;
+            if (type === "image" && asFeaturedImage && thumbnail_id !== newValue.id) {
+              console.log("setThumbnail", newValue.id);
+            }
             setAttributes({ [options2.key]: newValue });
           }
         };
@@ -5058,14 +5099,14 @@ function RegisterBlock(options) {
                   false,
                   {
                     fileName: "src/Setup/RegisterBlock.tsx",
-                    lineNumber: 145,
+                    lineNumber: 168,
                     columnNumber: 27
                   },
                   this
                 );
               }) }, void 0, false, {
                 fileName: "src/Setup/RegisterBlock.tsx",
-                lineNumber: 139,
+                lineNumber: 162,
                 columnNumber: 19
               }, this)
             },
@@ -5073,14 +5114,14 @@ function RegisterBlock(options) {
             false,
             {
               fileName: "src/Setup/RegisterBlock.tsx",
-              lineNumber: 135,
+              lineNumber: 158,
               columnNumber: 17
             },
             this
           );
         }) }, void 0, false, {
           fileName: "src/Setup/RegisterBlock.tsx",
-          lineNumber: 132,
+          lineNumber: 155,
           columnNumber: 11
         }, this),
         registredAttrs.map((attr3) => {
@@ -5097,7 +5138,7 @@ function RegisterBlock(options) {
             false,
             {
               fileName: "src/Setup/RegisterBlock.tsx",
-              lineNumber: 162,
+              lineNumber: 185,
               columnNumber: 15
             },
             this
@@ -5113,14 +5154,14 @@ function RegisterBlock(options) {
           false,
           {
             fileName: "src/Setup/RegisterBlock.tsx",
-            lineNumber: 171,
+            lineNumber: 194,
             columnNumber: 11
           },
           this
         )
       ] }, void 0, true, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 131,
+        lineNumber: 154,
         columnNumber: 9
       }, this);
     },
@@ -5128,6 +5169,9 @@ function RegisterBlock(options) {
       new Context().set("save");
       const attr2 = (options2) => {
         return {
+          toString() {
+            return attributes2[options2.key];
+          },
           get value() {
             return attributes2[options2.key];
           },
@@ -5146,13 +5190,13 @@ function RegisterBlock(options) {
         false,
         {
           fileName: "src/Setup/RegisterBlock.tsx",
-          lineNumber: 191,
+          lineNumber: 217,
           columnNumber: 11
         },
         this
       ) }, void 0, false, {
         fileName: "src/Setup/RegisterBlock.tsx",
-        lineNumber: 190,
+        lineNumber: 216,
         columnNumber: 9
       }, this);
     }
@@ -5184,16 +5228,16 @@ var SaveOnly = ({ children }) => {
 // src/Components/PageTitle.tsx
 var import_jsx_dev_runtime14 = __toESM(require_jsx_dev_runtime(), 1);
 var { RichText: RichText2 } = window.wp.blockEditor;
-var { useSelect, useDispatch } = window.wp.data;
+var { useSelect: useSelect2, useDispatch: useDispatch2 } = window.wp.data;
 var PageTitle = () => {
   const context = new Context().get();
   if (context === "save") {
     return "[page-title]";
   }
   if (context === "edit") {
-    const [title, setTitle] = useSelect((select) => {
+    const [title, setTitle] = useSelect2((select) => {
       const { getEditedPostAttribute } = select("core/editor");
-      const { editPost } = useDispatch("core/editor");
+      const { editPost } = useDispatch2("core/editor");
       return [
         getEditedPostAttribute("title"),
         function(value) {
@@ -5219,74 +5263,46 @@ var PageTitle = () => {
   }
 };
 
-// src/Components/PageThumbnail.tsx
+// src/Components/PageMeta.tsx
 var import_jsx_dev_runtime15 = __toESM(require_jsx_dev_runtime(), 1);
-var { __: __7 } = window.wp.i18n;
-var { useSelect: useSelect2 } = window.wp.data;
-var PageThumbnail = ({ ...props }) => {
-  const ctx = new Context();
-  const context = ctx.get();
-  const registredAttributes = ctx.getRegistredAttributes();
-  if (context === "prepare") {
-    registredAttributes.push({
-      key: "__thumbnail",
-      label: __7("Thumbnail"),
-      type: "image",
-      default: ""
-    });
+var { RichText: RichText3 } = window.wp.blockEditor;
+var { useSelect: useSelect3, useDispatch: useDispatch3 } = window.wp.data;
+var PageMeta = ({ meta, placeholder }) => {
+  const context = new Context().get();
+  if (context === "save") {
+    return `[page-meta key="${meta}"]`;
   }
   if (context === "edit") {
-    const { imgUrl } = useSelect2((select) => {
+    const [title, setTitle, hasMetas] = useSelect3((select) => {
       const { getEditedPostAttribute } = select("core/editor");
-      const thumbnail = getEditedPostAttribute("featured_media");
-      const media = thumbnail ? select("core").getMedia(thumbnail) : null;
-      return {
-        thumbnail,
-        imgUrl: media?.source_url || null
-      };
+      const { editPost } = useDispatch3("core/editor");
+      const metas = getEditedPostAttribute("meta");
+      return [
+        metas[meta],
+        function(value) {
+          editPost({ meta: { ...metas, [meta]: value } });
+        },
+        !!metas
+      ];
     }, []);
-    const Picture = {
-      get value() {
-        return {
-          url: imgUrl
-        };
-      },
-      set value(val) {
-        console.log(val);
-      }
-    };
+    console.log(title);
+    if (!hasMetas) return null;
     return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
-      Image,
+      RichText3,
       {
-        src: Picture,
-        ...props
+        placeholder: placeholder || "Page Meta",
+        value: title,
+        onChange: setTitle
       },
       void 0,
       false,
       {
-        fileName: "src/Components/PageThumbnail.tsx",
-        lineNumber: 46,
+        fileName: "src/Components/PageMeta.tsx",
+        lineNumber: 32,
         columnNumber: 7
       }
     );
   }
-  if (context === "save" && false) {
-    return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("img", { ...props }, void 0, false, {
-      fileName: "src/Components/PageThumbnail.tsx",
-      lineNumber: 53,
-      columnNumber: 12
-    });
-  }
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", {}, void 0, false, {
-    fileName: "src/Components/PageThumbnail.tsx",
-    lineNumber: 56,
-    columnNumber: 10
-  });
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_jsx_dev_runtime15.Fragment, {}, void 0, false, {
-    fileName: "src/Components/PageThumbnail.tsx",
-    lineNumber: 58,
-    columnNumber: 10
-  });
 };
 /*! Bundled license information:
 

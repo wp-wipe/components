@@ -12,7 +12,13 @@ export const EditColorAttr = ({ options, attributes, setAttributes }: WipeTypeOp
       [options.key]: color,
     });
   }
+  if (options.group)
+    return (
+      <>
+      
 
+      </>
+    );
   return (
     <>
       {!options.group && (

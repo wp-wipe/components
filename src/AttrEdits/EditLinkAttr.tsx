@@ -35,21 +35,19 @@ export const EditLinkAttr = ({ options, attributes, setAttributes, groupRender }
     );
   return (
     <>
-      {!options.group && (
-        <InspectorControls>
-          <PanelBody
-            title={options.label}
-            initialOpen={false}>
-            <Panel>
-              <URLInput
-                isFullWidth={true}
-                value={url}
-                onChange={(url: string) => setUrl({ url })}
-              />
-            </Panel>
-          </PanelBody>
-        </InspectorControls>
-      )}
+      <InspectorControls>
+        <PanelBody
+          title={options.label}
+          initialOpen={false}>
+          <Panel>
+            <URLInput
+              isFullWidth={true}
+              value={url}
+              onChange={(url: string) => setUrl({ url })}
+            />
+          </Panel>
+        </PanelBody>
+      </InspectorControls>
 
       <BlockControls>
         <ToolbarButton
@@ -74,7 +72,7 @@ export const EditLinkAttr = ({ options, attributes, setAttributes, groupRender }
                 setUrl(url);
                 setIsEditingURL(false);
               }}
-              onRemove={() => {}}
+              onRemove={() => { }}
               forceIsEditingLink={isEditingURL}
             />
           </Popover>

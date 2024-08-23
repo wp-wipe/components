@@ -11,6 +11,7 @@ import { NumberWipeAttrOptions } from "../Tools/Types";
 import { Panel, PanelBody } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 import { EditColorAttr } from "../AttrEdits/EditColorAttr";
+import { getThumbnail,  } from "../Tools/Thumbnail";
 
 interface CustomBlockOptions extends Omit<BlockConfiguration, "attributes" | "edit" | "save"> {
   name: string;
@@ -89,6 +90,9 @@ export function RegisterBlock(options: CustomBlockOptions) {
     };
     let internalValue = options.default || "";
     return {
+      toString() {
+        return internalValue;
+      },
       get value() {
         return internalValue;
       },
@@ -114,14 +118,33 @@ export function RegisterBlock(options: CustomBlockOptions) {
     ...otherOptions,
     attributes,
     edit: (props) => {
+      const { thumbnail_id, thumbnail_url } = getThumbnail();
       new Context().set("edit");
       const { attributes, setAttributes } = props;
       const attr: WipeAttrFct<WipeAttrOptions> = (options) => {
         return {
+          toString() {
+            return attributes[options.key];
+          },
           get value() {
+            const { asFeaturedImage, type } = options as ImageWipeAttrOptions;
+            if (type === "image" && asFeaturedImage) {
+              if (attributes[options.key] && attributes[options.key].id !== thumbnail_id) {
+                setAttributes({ [options.key]: { id: thumbnail_id } });
+              }
+              if (attributes[options.key] && thumbnail_url && attributes[options.key].url !== thumbnail_url) {
+                attributes[options.key].url = thumbnail_url;
+              }
+              return { url: thumbnail_url, id: thumbnail_id };
+            }
             return attributes[options.key];
           },
           set value(newValue) {
+            const { asFeaturedImage, type } = options as ImageWipeAttrOptions;
+            if (type === "image" && asFeaturedImage && thumbnail_id !== newValue.id) {
+              console.log("setThumbnail", newValue.id);
+              //setThumbnail(newValue.id);
+            }
             setAttributes({ [options.key]: newValue });
           },
         };
@@ -179,11 +202,14 @@ export function RegisterBlock(options: CustomBlockOptions) {
 
       const attr: WipeAttrFct<WipeAttrOptions> = (options) => {
         return {
+          toString() {
+            return attributes[options.key];
+          },
           get value() {
             return attributes[options.key];
           },
           // @ts-ignore
-          set value(newValue) {},
+          set value(newValue) { },
         };
       };
       return (
