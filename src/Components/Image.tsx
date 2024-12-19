@@ -13,9 +13,15 @@ export const Image = ({ src, ...props }: ImageOptions) => {
   if (typeof src.value === "string") {
     src.value = { url: src.value };
   }
+  if (typeof src.value === "object") {
+    src.value.y = (src.value?.y === undefined) ? 0.5 : src.value?.y;
+    src.value.x = (src.value?.x === undefined) ? 0.5 : src.value?.x;
+  }
   if (context === "edit" && src.value?.url) {
+
     return (
       <img
+        style={{ objectPosition: `${(src.value?.x) * 100}% ${src.value?.y * 100}%` }}
         src={src.value?.url}
         {...props}
       />
@@ -25,6 +31,7 @@ export const Image = ({ src, ...props }: ImageOptions) => {
   if (context === "save" && src.value?.url) {
     return (
       <img
+        style={{ objectPosition: `${src.value?.x * 100}% ${src.value?.y * 100}%` }}
         src={src.value?.url}
         {...props}
       />

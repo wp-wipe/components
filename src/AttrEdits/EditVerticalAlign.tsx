@@ -38,7 +38,6 @@ const choices = {
 
 export const EditVerticalAlign = ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<ValignWipeAttrOptions>) => {
   const onChange = (alignment: string) => {
-    console.log(alignment);
     setAttributes({ [options.key]: alignment });
   };
 

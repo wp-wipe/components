@@ -1,6 +1,6 @@
 declare module '@wp-wipe/components/AttrEdits/EditColorAttr' {
   import type { ColorWipeAttrOptions, WipeTypeOptions } from "@wp-wipe/components/Tools/Types";
-  export const EditColorAttr: ({ options, attributes, setAttributes }: WipeTypeOptions<ColorWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
+  export const EditColorAttr: ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<ColorWipeAttrOptions>) => import("react/jsx-dev-runtime").JSX.Element;
 
 }
 declare module '@wp-wipe/components/AttrEdits/EditHorizontalAlign' {
@@ -95,6 +95,12 @@ declare module '@wp-wipe/components/Components/_Align' {
 
 }
 declare module '@wp-wipe/components/Components/_Colors' {
+  import type { Attr } from "@wp-wipe/components/Tools/Types";
+  type LinkOptions = {
+      href: Attr;
+  } & Record<string, any>;
+  export const Color: ({ href, children, ...props }: LinkOptions) => import("react/jsx-dev-runtime").JSX.Element;
+  export {};
 
 }
 declare module '@wp-wipe/components/Setup/RegisterBlock' {
@@ -162,7 +168,7 @@ declare module '@wp-wipe/components/Tools/Types' {
       label: string;
       group?: WipeGroup;
       default?: any;
-      type: "link" | "image" | "color" | "number" | "string" | "valign" | "halign" | "array";
+      type: "link" | "image" | "color" | "number" | "string" | "valign" | "halign" | "array" | "object";
   };
   export interface LinkWipeAttrOptions extends WipeAttrOptions {
       default?: any;

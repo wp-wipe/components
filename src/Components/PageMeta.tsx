@@ -18,15 +18,15 @@ export const PageMeta = ({ meta, placeholder }: {
       const { getEditedPostAttribute } = select("core/editor") as { getEditedPostAttribute: any };
       const { editPost } = useDispatch("core/editor");
       const metas = getEditedPostAttribute("meta");
+      const value = metas ?  metas[meta] as string : null
       return [
-        metas[meta] as string,
+        value,
         function (value: string) {
           editPost({ meta: { ...metas, [meta]: value } });
         },
         !!metas,
       ] as const;
     }, []);
-    console.log(title)
     if (!hasMetas) return null
     return (
       <RichText

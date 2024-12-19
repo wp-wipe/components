@@ -7,13 +7,17 @@ import type { LinkWipeAttrOptions, WipeTypeOptions } from "../Tools/Types";
 import { URLInput, __experimentalLinkControl as LinkControl, InspectorControls, BlockControls } from "@wordpress/block-editor";
 
 export const EditLinkAttr = ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<LinkWipeAttrOptions>) => {
+  if (typeof attributes[options.key] == "string") {
+    attributes[options.key] = { url: attributes[options.key] }
+    setAttributes({ [options.key]: { url: attributes[options.key] } });
+  }
+
+
   const [isEditingURL, setIsEditingURL] = useState(false);
   const [popoverAnchor, setPopoverAnchor] = useState(null);
   const startEditing = () => setIsEditingURL(true);
 
-  if (typeof attributes[options.key] == "string") {
-    setAttributes({ [options.key]: { url: attributes[options.key] } });
-  }
+
 
   const url = attributes[options.key]?.url || "";
 

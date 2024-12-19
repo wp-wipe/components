@@ -37,7 +37,6 @@ const choices = {
 
 export const EditHorizontalAlign = ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<HalignWipeAttrOptions>) => {
   const onChange = (alignment: string) => {
-    console.log(alignment);
     setAttributes({ [options.key]: alignment });
   };
 

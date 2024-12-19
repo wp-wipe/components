@@ -2,9 +2,11 @@ import { WipeAttrOptions } from "./Types";
 
 export class Context {
   private static _instance: Context;
-  private value: any;
+  private value: "prepare" | "edit" | "save";
   private attributes: Record<string, any> = {};
+  private attributesSetter: ((a: any) => void) | null = null;
   private registredAttributes: WipeAttrOptions[];
+  private groups: { label: string }[] = [];
 
   constructor() {
     if (!Context._instance) {
@@ -12,7 +14,7 @@ export class Context {
     }
     return Context._instance;
   }
-  set(value: any) {
+  set(value: "prepare" | "edit" | "save") {
     this.value = value;
     return this;
   }
@@ -32,5 +34,19 @@ export class Context {
   }
   getRegistredAttributes() {
     return this.registredAttributes;
+  }
+  setAttributesSetter(setter: (a: any) => void) {
+    this.attributesSetter = setter;
+    return this;
+  }
+  getAttributesSetter() {
+    return this.attributesSetter;
+  }
+  getGroups() {
+    return this.groups;
+  }
+  setGroups(groups: { label: string }[]) {
+    this.groups = groups;
+    return this;
   }
 }

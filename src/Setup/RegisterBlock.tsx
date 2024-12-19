@@ -1,32 +1,23 @@
 import { registerBlockType, type BlockConfiguration } from "@wordpress/blocks";
-import type { WipeAttrFct, WipeAttrOptions, ColorWipeAttrOptions, HalignWipeAttrOptions, ImageWipeAttrOptions, LinkWipeAttrOptions, StringWipeAttrOptions, ValignWipeAttrOptions, WipeAttrFctPartial } from "../Tools/Types";
+import type { WipeAttrOptions, ColorWipeAttrOptions, HalignWipeAttrOptions, ImageWipeAttrOptions, LinkWipeAttrOptions, ValignWipeAttrOptions } from "../Tools/Types";
 
 import { Context } from "../Tools/Context";
-import { render as ReactRender } from "@wordpress/element";
 import { EditLinkAttr } from "../AttrEdits/EditLinkAttr";
 import { EditImageAttr } from "../AttrEdits/EditImageAttr";
 import { EditVerticalAlign } from "../AttrEdits/EditVerticalAlign";
 import { EditHorizontalAlign } from "../AttrEdits/EditHorizontalAlign";
-import { NumberWipeAttrOptions } from "../Tools/Types";
 import { Panel, PanelBody } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 import { EditColorAttr } from "../AttrEdits/EditColorAttr";
-import { getThumbnail,  } from "../Tools/Thumbnail";
+import { EditBoolean } from "../AttrEdits/EditBoolean";
+import { EditList } from "../AttrEdits/EditList";
+import { EditFileAttr } from "../AttrEdits/EditFileAttr";
+
 
 interface CustomBlockOptions extends Omit<BlockConfiguration, "attributes" | "edit" | "save"> {
   name: string;
   title: string;
-  render: (options: {
-    image: WipeAttrFctPartial<ImageWipeAttrOptions>;
-    link: WipeAttrFctPartial<LinkWipeAttrOptions>;
-    color: WipeAttrFctPartial<ColorWipeAttrOptions>;
-    number: WipeAttrFctPartial<NumberWipeAttrOptions>;
-    string: WipeAttrFctPartial<StringWipeAttrOptions>;
-    valign: WipeAttrFctPartial<ValignWipeAttrOptions>;
-    halign: WipeAttrFctPartial<HalignWipeAttrOptions>;
-    group: (label: string) => { label: string };
-    attr: WipeAttrFct<WipeAttrOptions>;
-  }) => JSX.Element;
+  render: (options?: Record<string, any>) => JSX.Element;
 }
 
 type EditRenderFct = ({ options, attributes, setAttributes, groupRender }) => JSX.Element;
@@ -34,6 +25,8 @@ function getRenderer(options: WipeAttrOptions) {
   switch (options.type) {
     case "image":
       return [EditImageAttr, options] as [EditRenderFct, ImageWipeAttrOptions];
+    case "file":
+      return [EditFileAttr, options] as [EditRenderFct, ImageWipeAttrOptions];
     case "link":
       return [EditLinkAttr, options] as [EditRenderFct, LinkWipeAttrOptions];
     case "valign":
@@ -42,6 +35,10 @@ function getRenderer(options: WipeAttrOptions) {
       return [EditHorizontalAlign, options] as [EditRenderFct, HalignWipeAttrOptions];
     case "color":
       return [EditColorAttr, options] as [EditRenderFct, ColorWipeAttrOptions];
+    case "boolean":
+      return [EditBoolean, options] as [EditRenderFct, ColorWipeAttrOptions];
+    case "list":
+      return [EditList, options] as [EditRenderFct, ColorWipeAttrOptions];
     case "string":
     case "number":
     default:
@@ -49,106 +46,51 @@ function getRenderer(options: WipeAttrOptions) {
   }
 }
 
-function buildVariantesAttributes(attr: WipeAttrFct<WipeAttrOptions>) {
-  return {
-    attr: (options: WipeAttrOptions) => attr(options),
-    image: ((option: Omit<ImageWipeAttrOptions, "type">) => attr({ ...option, type: "image" })) as WipeAttrFctPartial<ImageWipeAttrOptions>,
-    link: ((option: Omit<LinkWipeAttrOptions, "type">) => attr({ ...option, type: "link" })) as WipeAttrFctPartial<LinkWipeAttrOptions>,
-    color: ((option: Omit<ColorWipeAttrOptions, "type">) => attr({ ...option, type: "color" })) as WipeAttrFctPartial<ColorWipeAttrOptions>,
-    number: ((option: Omit<NumberWipeAttrOptions, "type">) => attr({ ...option, type: "number" })) as WipeAttrFctPartial<NumberWipeAttrOptions>,
-    string: ((option: Omit<StringWipeAttrOptions, "type">) => attr({ ...option, type: "string" })) as WipeAttrFctPartial<StringWipeAttrOptions>,
-    valign: ((option: Omit<ValignWipeAttrOptions, "type">) => attr({ ...option, type: "valign" })) as WipeAttrFctPartial<ValignWipeAttrOptions>,
-    halign: ((option: Omit<HalignWipeAttrOptions, "type">) => attr({ ...option, type: "halign" })) as WipeAttrFctPartial<HalignWipeAttrOptions>,
-  } as const;
+function checkForEditor() {
+  // @ts-ignore
+  return (window?.wp?.element && window?.wp?.blockEditor);
 }
 
-export function RegisterBlock(options: CustomBlockOptions) {
-  const { name, render, ...otherOptions } = options;
-  const Render = render;
 
+
+export function RegisterBlock(options: CustomBlockOptions) {
+  if (!checkForEditor()) return;
   // BUILDING ATTRIBUTES
   const attributes: any = {};
   const groups = [] as { label: string }[];
   const registredAttrs = [] as WipeAttrOptions[];
-  new Context().set("prepare").setAttributes(attributes).setRegistredAttributes(registredAttrs);
+  new Context()
+    .set("prepare")
+    .setAttributes(attributes)
+    .setRegistredAttributes(registredAttrs)
+    .setAttributesSetter(null)
+    .setGroups(groups);
 
-  const attr: WipeAttrFct<WipeAttrOptions> = (options) => {
-    registredAttrs.push(options);
-    const typeMap = {
-      link: "object",
-      image: "object",
-      color: "string",
-      number: "number",
-      string: "string",
-      valign: "string",
-      halign: "string",
-    };
+  const { name, render, ...otherOptions } = options;
+  const Render = render;
 
-    attributes[options.key] = {
-      type: typeMap[options.type] || options.type,
-      default: options.default,
+
+
+
+
+  Render({})
+
+  const formattedArguments = {} as Record<string, Record<string, any>>;
+  registredAttrs.forEach((attr) => {
+    formattedArguments[attr.key] = {
+      type: attr.type,
+      default: attr.default,
+      hideControls: attr.hideControls,
     };
-    let internalValue = options.default || "";
-    return {
-      toString() {
-        return internalValue;
-      },
-      get value() {
-        return internalValue;
-      },
-      set value(newValue) {
-        internalValue = newValue;
-        attributes[options.key] = {
-          type: typeof newValue || "string",
-        };
-      },
-    };
-  };
-  const group = (label: string) => {
-    if (groups.find((group) => group.label === label)) {
-      return groups.find((group) => group.label === label);
-    }
-    const obj = { label } as const;
-    groups.push(obj);
-    return obj;
-  };
-  ReactRender(Render({ ...buildVariantesAttributes(attr), group }), document.createElement("div"));
+  });
 
   registerBlockType(name, {
     ...otherOptions,
-    attributes,
+    attributes: formattedArguments,
     edit: (props) => {
-      const { thumbnail_id, thumbnail_url } = getThumbnail();
-      new Context().set("edit");
+      new Context().set("edit").setAttributes(props.attributes).setAttributesSetter(props.setAttributes).setGroups(groups);
       const { attributes, setAttributes } = props;
-      const attr: WipeAttrFct<WipeAttrOptions> = (options) => {
-        return {
-          toString() {
-            return attributes[options.key];
-          },
-          get value() {
-            const { asFeaturedImage, type } = options as ImageWipeAttrOptions;
-            if (type === "image" && asFeaturedImage) {
-              if (attributes[options.key] && attributes[options.key].id !== thumbnail_id) {
-                setAttributes({ [options.key]: { id: thumbnail_id } });
-              }
-              if (attributes[options.key] && thumbnail_url && attributes[options.key].url !== thumbnail_url) {
-                attributes[options.key].url = thumbnail_url;
-              }
-              return { url: thumbnail_url, id: thumbnail_id };
-            }
-            return attributes[options.key];
-          },
-          set value(newValue) {
-            const { asFeaturedImage, type } = options as ImageWipeAttrOptions;
-            if (type === "image" && asFeaturedImage && thumbnail_id !== newValue.id) {
-              console.log("setThumbnail", newValue.id);
-              //setThumbnail(newValue.id);
-            }
-            setAttributes({ [options.key]: newValue });
-          },
-        };
-      };
+
 
       return (
         <>
@@ -161,6 +103,7 @@ export function RegisterBlock(options: CustomBlockOptions) {
                   initialOpen={false}>
                   <Panel>
                     {registredAttrs
+                      .filter(a => a.hideControls !== true)
                       .filter((attr) => attr.group === group)
                       .map((attr) => {
                         const [RenderAttrFunction, options] = getRenderer(attr);
@@ -179,7 +122,8 @@ export function RegisterBlock(options: CustomBlockOptions) {
               );
             })}
           </InspectorControls>
-          {registredAttrs.map((attr) => {
+
+          {registredAttrs.filter(a => a.hideControls !== true).map((attr) => {
             const [RenderAttrFunction, options] = getRenderer(attr);
             return (
               <RenderAttrFunction
@@ -191,32 +135,15 @@ export function RegisterBlock(options: CustomBlockOptions) {
               />
             );
           })}
-          <Render
-            {...buildVariantesAttributes(attr)}
-            group={(label: string) => ({ label })}></Render>
+          <Render {...props}></Render>
         </>
       );
     },
-    save: ({ attributes }) => {
-      new Context().set("save");
-
-      const attr: WipeAttrFct<WipeAttrOptions> = (options) => {
-        return {
-          toString() {
-            return attributes[options.key];
-          },
-          get value() {
-            return attributes[options.key];
-          },
-          // @ts-ignore
-          set value(newValue) { },
-        };
-      };
+    save: (props) => {
+      new Context().set("save").setAttributes(props.attributes).setAttributesSetter(null);
       return (
         <>
-          <Render
-            {...buildVariantesAttributes(attr)}
-            group={(label: string) => ({ label })}></Render>
+          <Render  {...props}></Render>
         </>
       );
     },

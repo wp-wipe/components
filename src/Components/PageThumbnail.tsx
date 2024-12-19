@@ -39,7 +39,6 @@ export const PageThumbnail = ({ ...props }: ImageOptions) => {
         };
       },
       set value(val) {
-        console.log(val);
       },
     };
     return (

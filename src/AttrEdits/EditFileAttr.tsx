@@ -1,24 +1,17 @@
 import { PanelBody, Panel, Button, ButtonGroup, FocalPointPicker } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import type { ImageWipeAttrOptions, WipeTypeOptions } from "../Tools/Types";
+import type { FileWipeAttrOptions, WipeTypeOptions } from "../Tools/Types";
 import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
-
 // @ts-ignore
 import { URLInput, __experimentalLinkControl as LinkControl, InspectorControls, BlockControls } from "@wordpress/block-editor";
-import { dispatch } from '@wordpress/data';
-import { getThumbnail } from "../Tools/Thumbnail";
 
-export const EditImageAttr = ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<ImageWipeAttrOptions>) => {
+export const EditFileAttr = ({ options, attributes, setAttributes, groupRender }: WipeTypeOptions<FileWipeAttrOptions>) => {
   if (typeof attributes[options.key] == "string") {
     attributes[options.key] = { url: attributes[options.key], x: 0.5, y: 0.5 };
     setAttributes({ [options.key]: { url: attributes[options.key], x: 0.5, y: 0.5 } });
   }
 
   function onFileSelect(file: { id: number; url: string }) {
-    if (options.asFeaturedImage) {
-      const { editPost } = dispatch("core/editor") as { editPost: (changes: { [key: string]: any }) => void };
-      editPost({ featured_media: file.id });
-    }
     setAttributes({
       [options.key]: {
         ...attributes[options.key],
@@ -27,7 +20,6 @@ export const EditImageAttr = ({ options, attributes, setAttributes, groupRender 
     });
   }
   function setFocalPoint(focalPoint: { x: number; y: number }) {
-
     setAttributes({
       [options.key]: {
         ...attributes[options.key],
@@ -40,40 +32,17 @@ export const EditImageAttr = ({ options, attributes, setAttributes, groupRender 
       [options.key]: {},
     });
   }
-
-
   const internalValue = attributes[options.key] || {};
-  if (options.asFeaturedImage) {
-    const { thumbnail_id, thumbnail_url } = getThumbnail()
-    internalValue.url = thumbnail_url;
-    internalValue.id = thumbnail_id;
-  }
-
-
-
   if (groupRender)
     return (
       <>
-        {!!internalValue.id && options?.withFocalPoint && (
-          <FocalPointPicker
-            __nextHasNoMarginBottom
-            __next40pxDefaultSize
-            label={__("Focal point")}
-            url={internalValue.url}
-            value={internalValue ? { x: internalValue.x, y: internalValue.y } : { x: 0.5, y: 0.5 }}
-            onChange={(value) => setFocalPoint(value)}
-            onDragStart={(value) => setFocalPoint(value)}
-            onDrag={(value) => setFocalPoint(value)}
-          />
-        )}
-
         <MediaUploadCheck>
           <ButtonGroup>
             <MediaUpload
               onSelect={onFileSelect}
               value={internalValue.id}
               render={({ open }) => {
-                const label = internalValue.id ? __("Replace image") : __("Select");
+                const label = internalValue.id ? __("Replace file") : __("Select");
                 return (
                   <Button
                     onClick={open}
@@ -83,16 +52,15 @@ export const EditImageAttr = ({ options, attributes, setAttributes, groupRender 
                 );
               }}
             />
-            {!!internalValue.id && (
+            {internalValue.id && (
               <Button
                 onClick={removeImage}
                 variant="secondary">
-                <span dangerouslySetInnerHTML={{ __html: __("Remove image") }}></span>
+                <span dangerouslySetInnerHTML={{ __html: __("Remove file") }}></span>
               </Button>
             )}
           </ButtonGroup>
         </MediaUploadCheck>
-
       </>
     );
   return (
@@ -103,25 +71,13 @@ export const EditImageAttr = ({ options, attributes, setAttributes, groupRender 
             title={options.label}
             initialOpen={false}>
             <Panel>
-              {!!internalValue.id && options?.withFocalPoint && (
-                <FocalPointPicker
-                  __nextHasNoMarginBottom
-                  __next40pxDefaultSize
-                  label={__("Focal point")}
-                  url={internalValue.url}
-                  value={internalValue ? { x: internalValue.x, y: internalValue.y } : { x: 0.5, y: 0.5 }}
-                  onChange={(value) => setFocalPoint(value)}
-                  onDragStart={(value) => setFocalPoint(value)}
-                  onDrag={(value) => setFocalPoint(value)}
-                />
-              )}
               <MediaUploadCheck>
                 <ButtonGroup>
                   <MediaUpload
                     onSelect={onFileSelect}
                     value={internalValue.id}
                     render={({ open }) => {
-                      const label = internalValue.id ? __("Replace image") : __("Select");
+                      const label = internalValue.id ? __("Replace file") : __("Select");
                       return (
                         <Button
                           onClick={open}
@@ -135,7 +91,7 @@ export const EditImageAttr = ({ options, attributes, setAttributes, groupRender 
                     <Button
                       onClick={removeImage}
                       variant="secondary">
-                      <span dangerouslySetInnerHTML={{ __html: __("Remove image") }}></span>
+                      <span dangerouslySetInnerHTML={{ __html: __("Remove file") }}></span>
                     </Button>
                   )}
                 </ButtonGroup>
