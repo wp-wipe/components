@@ -66,7 +66,7 @@ export function attr(options: WipeAttrOptions): { value: any; toString: () => st
         const attributes = new Context().getAttributes();
         const value = attributes[options.key] || options.default;
         const setAttributes = new Context().getAttributesSetter();
-        if (!attributes[options.key] || attributes[options.key].url !== thumbnail_url) {
+        if (attributes[options.key] && attributes[options.key].url !== thumbnail_url) {
           if (setAttributes) setAttributes({ [options.key]: { ...value, url: thumbnail_url, id: thumbnail_id } });
         }
         return { ...value, url: thumbnail_url, id: thumbnail_id };
@@ -81,7 +81,7 @@ export function attr(options: WipeAttrOptions): { value: any; toString: () => st
       toString() {
         const attributes = new Context().getAttributes();
         const setAttributes = new Context().getAttributesSetter();
-        if (!attributes[options.key] || attributes[options.key].url !== thumbnail_url) {
+        if (attributes[options.key] && attributes[options.key].url !== thumbnail_url) {
           const value = attributes[options.key] || options.default;
           if (setAttributes) setAttributes({ [options.key]: { ...value, url: thumbnail_url, id: thumbnail_id } });
         }

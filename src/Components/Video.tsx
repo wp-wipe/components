@@ -32,6 +32,7 @@ export const Video = ({ src, loop, autoplay, ...props }: Options) => {
         autoPlay={autoplay}
         muted={autoplay}
         loop={loop}
+        playsInline={true}
         {...props}
       >
         <source src={src.value?.url} />
