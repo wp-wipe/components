@@ -42,7 +42,7 @@ function getRenderer(options: WipeAttrOptions) {
     case "string":
     case "number":
     default:
-      return [() => <div></div>, options] as [EditRenderFct, WipeAttrOptions];
+      return [() => null, options] as [EditRenderFct, WipeAttrOptions]; 
   }
 }
 

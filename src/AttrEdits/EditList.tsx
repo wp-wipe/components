@@ -30,7 +30,6 @@ export const EditList = ({ options, attributes, setAttributes, groupRender }: Wi
       value: key
     });
   })
-  console.log(optionsChoices)
 
   if (groupRender) {
     /**/

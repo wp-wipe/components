@@ -1,14 +1,26 @@
-import {Context} from "../Tools/Context";
-import { InnerBlocks } from "@wordpress/block-editor";
+import { Context } from "../Tools/Context";
+import { InnerBlocks, useInnerBlocksProps } from "@wordpress/block-editor";
 
 export const Childs = ({ ...props }: Record<string, any>) => {
   const context = new Context().get();
+  const className = props.className || '';
+
+
+
 
   if (context === "edit") {
-    return <InnerBlocks {...props} />;
+    const innerBlocksProps = useInnerBlocksProps({
+      ...props
+    }, {
+      ...props
+    });
+    return <div {...innerBlocksProps} className={`${className} `} />;
   }
   if (context === "save") {
-    return <InnerBlocks.Content {...props} />;
+    const innerBlocksProps = useInnerBlocksProps.save({
+      ...props
+    });
+    return <div {...innerBlocksProps} />;
   }
-  return <div></div>;
+  return null;
 };
