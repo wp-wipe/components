@@ -63,24 +63,24 @@ export function attr(options: WipeAttrOptions): { value: any; toString: () => st
     const { thumbnail_id, thumbnail_url } = getThumbnail();
     return {
       get value() {
-        const attributes = new Context().getAttributes();
+        const attributes = ctx.getAttributes();
         const value = attributes[options.key] || options.default;
-        const setAttributes = new Context().getAttributesSetter();
+        const setAttributes = ctx.getAttributesSetter();
         if (attributes[options.key] && attributes[options.key].url !== thumbnail_url) {
           if (setAttributes) setAttributes({ [options.key]: { ...value, url: thumbnail_url, id: thumbnail_id } });
         }
         return { ...value, url: thumbnail_url, id: thumbnail_id };
       },
       set value(newValue: any) {
-        const setAttributes = new Context().getAttributesSetter();
+        const setAttributes = ctx.getAttributesSetter();
         if (setAttributes) {
           setAttributes({ [options.key]: newValue });
         }
         setThumbnail(newValue.id);
       },
       toString() {
-        const attributes = new Context().getAttributes();
-        const setAttributes = new Context().getAttributesSetter();
+        const attributes = ctx.getAttributes();
+        const setAttributes = ctx.getAttributesSetter();
         if (attributes[options.key] && attributes[options.key].url !== thumbnail_url) {
           const value = attributes[options.key] || options.default;
           if (setAttributes) setAttributes({ [options.key]: { ...value, url: thumbnail_url, id: thumbnail_id } });
@@ -95,17 +95,17 @@ export function attr(options: WipeAttrOptions): { value: any; toString: () => st
 
   return {
     get value() {
-      const attributes = new Context().getAttributes();
+      const attributes = ctx.getAttributes();
       const value = attributes[options.key] || options.default;
       return value;
     },
 
     set value(newValue: any) {
-      const setAttributes = new Context().getAttributesSetter();
+      const setAttributes = ctx.getAttributesSetter();
       if (setAttributes) setAttributes({ [options.key]: newValue });
     },
     toString() {
-      const attributes = new Context().getAttributes();
+      const attributes = ctx.getAttributes();
       const value = attributes[options.key] || options.default;
       if (options.type === "link" && value) {
         return value?.url || "";
